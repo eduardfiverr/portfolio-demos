@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — landing pages</title>
+<meta name="description" content="Demo landing pages: barber, dental, fitness, bakery, SaaS, yoga. All businesses are fictional.">
+<style>
+:root{--bg:#f6f4ef;--text:#1c1b19;--muted:#5b574f;--card:#fff;--line:#ddd8cc;--acc:#1f4e9c}
+@media(prefers-color-scheme:dark){:root{--bg:#141412;--text:#f2efe8;--muted:#b0aa9d;--card:#1d1c19;--line:#34312b;--acc:#8db4ff}}
+*{box-sizing:border-box;margin:0}
+body{font:17px/1.6 system-ui,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+main{max-width:960px;margin:0 auto;padding:48px 20px}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;margin-bottom:12px}
+p.lead{color:var(--muted);max-width:36rem;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;list-style:none;padding:0}
+a.card{display:block;min-height:44px;padding:20px;background:var(--card);border:1px solid var(--line);border-radius:12px;text-decoration:none;color:inherit}
+a.card:hover,a.card:focus-visible{border-color:var(--acc);outline:2px solid var(--acc)}
+a.card b{display:block;font-size:1.15rem}
+a.card span{color:var(--muted);font-size:15px}
+small{display:block;margin-top:32px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<h1>Landing pages for small businesses</h1>
+<p class="lead">Fast, mobile-first one-page sites with booking forms, calculators and Telegram bots. Pages en français aussi.</p>
+<ul class="grid">
+<li><a class="card" href="landing-barber/"><b>Cutline Barbers</b><span>EN · Barbershop, online booking</span></a></li>
+<li><a class="card" href="landing-dental/"><b>Lumen Dental</b><span>EN · Dental clinic, price builder</span></a></li>
+<li><a class="card" href="landing-fitness/"><b>FORGE</b><span>EN · Online coaching, plan finder</span></a></li>
+<li><a class="card" href="landing-bakery/"><b>Atelier Fournil</b><span>FR · Boulangerie artisanale</span></a></li>
+<li><a class="card" href="landing-saas/"><b>Tidyfy</b><span>FR · Facturation freelances</span></a></li>
+<li><a class="card" href="landing-yoga/"><b>Souffle</b><span>FR · Studio de yoga</span></a></li>
+</ul>
+<small>Demo websites — all businesses are fictional.</small>
+</main>
+</body>
+</html>

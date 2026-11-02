@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FORGE — Online personal training</title>
+<meta name="description" content="Online personal training and nutrition coaching. A 12-week plan built around your schedule, your gym and your goals. Free plan builder inside.">
+<meta name="theme-color" content="#0a0a0c">
+<script>document.documentElement.className += ' js';</script>
+<style>
+  :root{
+    --bg:#0a0a0c; --card:#15151a; --card2:#1d1d24; --line:#2e2e38; --text:#f4f4f6; --muted:#a8a8b5;
+    --lime:#c6ff3d; --lime-dim:#9fd12a; --coral:#ff7a59; --err:#ff8f80;
+    --display:"Arial Narrow","Helvetica Neue Condensed","Franklin Gothic Medium","Segoe UI",system-ui,Arial,sans-serif;
+    --sans:"Inter","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    --ease:cubic-bezier(.3,.1,.2,1);
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;font-size:17px;overflow-x:hidden}
+  img,svg{max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .demo{background:#fff3c4;color:#5c4400;text-align:center;font-size:14px;line-height:1.4;padding:10px 16px;font-weight:500}
+
+  /* header */
+  header{position:sticky;top:0;z-index:30;background:rgba(10,10,12,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:12px;flex-wrap:wrap}
+  .logo{font-family:var(--display);font-weight:900;font-size:1.7rem;letter-spacing:.22em;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;gap:10px}
+  .logo i{color:var(--lime);font-style:normal}
+  .logo svg{width:26px;height:26px}
+  nav ul{list-style:none;padding:0;display:flex;gap:2px;align-items:center}
+  nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 13px;text-decoration:none;color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;border-radius:8px;transition:color .2s,background .2s}
+  nav a:hover{color:var(--lime);background:var(--card)}
+  nav a.nav-cta{background:var(--lime);color:#0a0a0c;font-weight:800}
+  nav a.nav-cta:hover{background:#d6ff6b;color:#0a0a0c}
+  #burger{display:none;width:48px;height:48px;border:1px solid var(--line);background:transparent;border-radius:12px;cursor:pointer;align-items:center;justify-content:center;color:var(--text)}
+  #burger span{display:block;width:22px;height:2px;background:currentColor;position:relative;border-radius:2px}
+  #burger span::before,#burger span::after{content:"";position:absolute;left:0;width:22px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s var(--ease)}
+  #burger span::before{top:-7px}#burger span::after{top:7px}
+  #burger[aria-expanded="true"] span{background:transparent}
+  #burger[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+  #burger[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border-radius:10px;background:var(--lime);color:#0a0a0c;text-decoration:none;font:800 15px/1 var(--sans);text-transform:uppercase;letter-spacing:.07em;border:0;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(198,255,61,.28);background:#d6ff6b}
+  .btn.ghost{background:transparent;color:var(--text);border:2px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--lime);box-shadow:none;background:transparent;color:var(--lime)}
+  .btn.small{min-height:44px;padding:0 20px;font-size:14px}
+
+  /* type */
+  h1,h2,h3{font-family:var(--display);text-transform:uppercase;font-weight:900;line-height:1;letter-spacing:-.005em}
+  h1{font-size:clamp(3rem,8.4vw,6.2rem)}
+  h1 span,h2 span{color:var(--lime)}
+  h2{font-size:clamp(2.3rem,5vw,3.8rem);margin-bottom:14px}
+  h3{font-size:1.6rem;margin-bottom:6px;letter-spacing:.01em}
+  .eyebrow{display:block;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);font-weight:700;margin-bottom:14px}
+  .lead{color:var(--muted);max-width:36rem;font-size:1.1rem}
+  section{position:relative;padding:96px 0}
+  .head{margin-bottom:48px}
+  .center{text-align:center}.center .lead{margin:0 auto}
+
+  /* hero */
+  .hero{padding:56px 0 88px;overflow:hidden;background:radial-gradient(50% 60% at 88% 18%,rgba(198,255,61,.14),transparent),radial-gradient(40% 50% at 0% 100%,rgba(255,122,89,.1),transparent),var(--bg)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .hero p.lead{margin:24px 0 32px;font-size:1.2rem}
+  .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .facts{display:flex;gap:30px;margin-top:38px;flex-wrap:wrap;color:var(--muted);font-size:15px}
+  .facts b{display:block;font-family:var(--display);font-size:2.4rem;color:var(--text);font-weight:900;line-height:1}
+  .dash{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:26px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .dash::before{content:"";position:absolute;inset:-1px;border-radius:28px;padding:1px;background:linear-gradient(140deg,rgba(198,255,61,.6),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .dash-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);margin-bottom:8px}
+  .dash-top b{color:var(--lime);letter-spacing:.1em;text-transform:uppercase}
+  .ring{display:block;width:min(260px,100%);margin:6px auto 4px}
+  .ring .arc{stroke-dasharray:540;stroke-dashoffset:540;animation:fill 2.2s var(--ease) .4s forwards}
+  @keyframes fill{to{stroke-dashoffset:150}}
+  .bars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:90px;margin-top:10px}
+  .bars i{display:block;border-radius:6px 6px 2px 2px;background:var(--card2);height:var(--h);transform-origin:bottom;animation:grow .9s var(--ease) both;animation-delay:calc(var(--i)*90ms + .6s)}
+  .bars i.on{background:var(--lime)}
+  @keyframes grow{from{transform:scaleY(.05);opacity:0}to{transform:none;opacity:1}}
+  .bar-days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;font-size:13px;color:var(--muted);margin-top:6px}
+  .dash-foot{display:flex;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:14px;color:var(--muted)}
+  .dash-foot b{color:var(--text)}
+
+  /* marquee */
+  .marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;background:var(--card)}
+  .marquee div{display:flex;gap:44px;white-space:nowrap;width:max-content;animation:slide 26s linear infinite;font-family:var(--display);font-size:1.5rem;text-transform:uppercase;font-weight:900;color:var(--muted);letter-spacing:.14em}
+  .marquee b{color:var(--lime);margin-left:44px}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 24px;position:relative;overflow:hidden;transition:transform .4s var(--ease),border-color .3s}
+  .step:hover{transform:translateY(-6px);border-color:var(--lime)}
+  .step .n{font-family:var(--display);font-size:4.6rem;font-weight:900;line-height:.9;color:transparent;-webkit-text-stroke:1.5px var(--lime);display:block;margin-bottom:12px}
+  .step p{color:var(--muted);font-size:16px}
+  .step .tag{display:inline-block;margin-top:14px;font-size:13px;color:var(--lime);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+  /* programmes */
+  .programs{background:var(--card);border-block:1px solid var(--line)}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:26px 24px 28px;transition:transform .4s var(--ease),border-color .3s,box-shadow .4s}
+  .card:hover{transform:translateY(-6px);border-color:var(--lime);box-shadow:0 20px 50px rgba(198,255,61,.08)}
+  .card .art{aspect-ratio:1.3;border-radius:16px;display:grid;place-items:center;margin-bottom:20px;background:linear-gradient(150deg,var(--card2),var(--card))}
+  .card .art svg{width:58%;height:auto}
+  .card .meta{font-size:13px;color:var(--lime);font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:16px}
+  .card ul{list-style:none;padding:0;margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+  .card li{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--muted)}
+
+  /* planner */
+  .planner-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:32px;align-items:start}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:30px 28px}
+  fieldset{border:0;padding:0;margin:0 0 22px;min-width:0}
+  legend{font-size:15px;font-weight:700;margin-bottom:10px;padding:0;letter-spacing:.02em}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+  .chip span{display:flex;align-items:center;justify-content:center;min-height:46px;min-width:48px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line);font-size:15px;font-weight:600;color:var(--text);transition:background .2s,color .2s,border-color .2s;background:var(--bg)}
+  .chip input:hover+span{border-color:var(--lime)}
+  .chip input:checked+span{background:var(--lime);color:#0a0a0c;border-color:var(--lime)}
+  .chip input:focus-visible+span{outline:3px solid #fff;outline-offset:2px}
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:20px}
+  .day{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center;min-height:96px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;line-height:1.25;color:var(--muted)}
+  .day b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .day.train{background:rgba(198,255,61,.1);border-color:var(--lime);color:var(--text)}
+  .day.train b{color:var(--lime)}
+  .day.train strong{font-weight:700;font-size:13px}
+  .day svg{width:20px;height:20px}
+  .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+  .sum div{background:var(--bg);border-radius:14px;padding:14px 12px;border:1px solid var(--line)}
+  .sum b{display:block;font-family:var(--display);font-size:1.8rem;line-height:1;color:var(--lime);font-weight:900}
+  .sum span{font-size:13px;color:var(--muted)}
+  .plan-note{color:var(--muted);font-size:16px;margin-bottom:20px}
+  .calc{margin-top:28px}
+  .calc h3{margin-bottom:14px}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .calc-out{margin-top:18px;background:var(--bg);border:1px dashed var(--lime);border-radius:16px;padding:16px 18px;color:var(--muted);font-size:16px}
+  .calc-out b{color:var(--lime);font-family:var(--display);font-size:1.7rem;font-weight:900}
+  .calc-out strong{color:var(--text)}
+
+  /* forms */
+  .field{display:flex;flex-direction:column;gap:6px}
+  label{font-size:15px;font-weight:600}
+  input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{font:400 16px/1.4 var(--sans);color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 16px;min-height:50px;width:100%}
+  textarea{min-height:100px;resize:vertical}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--lime) 50%),linear-gradient(135deg,var(--lime) 50%,transparent 50%);background-position:calc(100% - 22px) 22px,calc(100% - 16px) 22px;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+  input:focus,select:focus,textarea:focus{outline:3px solid var(--lime);outline-offset:1px;border-color:var(--lime)}
+  [aria-invalid="true"]{border-color:var(--err)!important;background:#1d1214!important}
+  .err{color:var(--err);font-size:14px}
+  .err:empty{display:none}
+  .note{font-size:14px;color:var(--muted);margin-top:14px}
+
+  /* results */
+  .results{background:var(--card);border-block:1px solid var(--line)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:56px}
+  .stat{border-left:3px solid var(--lime);padding-left:18px}
+  .stat b{display:block;font-family:var(--display);font-size:3.4rem;font-weight:900;line-height:1}
+  .stat span{color:var(--muted);font-size:15px}
+  .slider{position:relative}
+  .stories{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .js .stories{display:block}
+  .story{background:var(--bg);border:1px solid var(--line);border-radius:28px;padding:30px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+  .js .story{display:none}
+  .js .story.on{display:grid;animation:fadeUp .6s var(--ease) both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .story blockquote{font-family:var(--display);font-size:1.7rem;line-height:1.2;text-transform:none;font-weight:700}
+  .story cite{display:block;margin-top:14px;font-size:15px;color:var(--muted);font-style:normal;font-family:var(--sans);font-weight:400}
+  .story .chart{background:var(--card);border-radius:20px;padding:16px}
+  .story .chart svg{width:100%;height:auto;display:block}
+  .story .chart p{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:8px}
+  .story .chart p b{color:var(--lime)}
+  .slider-ctl{display:none;align-items:center;gap:12px;margin-top:20px}
+  .js .slider-ctl{display:flex}
+  .slider-ctl button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center;transition:border-color .2s,color .2s}
+  .slider-ctl button:hover{border-color:var(--lime);color:var(--lime)}
+  .dots{display:flex;gap:4px;margin-left:auto}
+  .dots button{width:44px;height:44px;border:0;background:transparent;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+  .dots button::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--line);transition:background .2s,width .3s}
+  .dots button[aria-current="true"]::before{background:var(--lime);width:28px;border-radius:8px}
+  .count{font-size:15px;color:var(--muted)}
+
+  /* trainers */
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .coach{text-align:center}
+  .coach svg{width:100%;max-width:280px;height:auto;margin:0 auto 20px;display:block}
+  .coach .role{color:var(--lime);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px}
+  .coach p{color:var(--muted);max-width:22rem;margin:0 auto;font-size:16px}
+
+  /* pricing */
+  .toggle{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:26px}
+  .js .toggle{display:inline-flex}.toggle{display:none}
+  .toggle button{min-height:46px;padding:0 22px;border:0;border-radius:10px;background:transparent;color:var(--muted);font:700 15px/1 var(--sans);cursor:pointer;transition:background .2s,color .2s}
+  .toggle button[aria-pressed="true"]{background:var(--lime);color:#0a0a0c}
+  .toggle em{font-style:normal;font-size:13px;margin-left:6px}
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .price{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:36px 30px;display:flex;flex-direction:column}
+  .price.feat{border-color:var(--lime);background:linear-gradient(180deg,#1b2112,var(--card) 60%);transform:translateY(-12px)}
+  .price .amt{font-family:var(--display);font-size:4rem;line-height:1;margin:16px 0 4px;font-weight:900}
+  .price .amt small{font-size:1rem;font-family:var(--sans);font-weight:400;color:var(--muted)}
+  .price .bill{color:var(--muted);font-size:14px;min-height:22px}
+  .price ul{list-style:none;padding:0;margin:20px 0 28px;display:grid;gap:10px;flex:1;font-size:16px}
+  .price li{padding-left:28px;position:relative}
+  .price li::before{content:"";position:absolute;left:0;top:.5em;width:14px;height:8px;border-left:3px solid var(--lime);border-bottom:3px solid var(--lime);transform:rotate(-45deg) scale(.9)}
+  .price .tag{align-self:flex-start;background:var(--lime);color:#0a0a0c;font-size:13px;font-weight:800;border-radius:6px;padding:4px 12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+  .price .btn{width:100%}
+  .price:not(.feat) .btn{background:transparent;color:var(--text);border:2px solid var(--line)}
+  .price:not(.feat) .btn:hover{border-color:var(--lime);color:var(--lime);box-shadow:none}
+
+  /* reviews */
+  .voices{background:var(--card);border-block:1px solid var(--line)}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .quote{background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:28px}
+  .quote .stars{color:var(--lime);letter-spacing:.2em;font-size:15px;margin-bottom:10px}
+  .quote p{font-size:1.1rem;line-height:1.5}
+  .quote footer{margin-top:20px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
+  .quote footer i{width:44px;height:44px;border-radius:50%;background:var(--lime);color:#0a0a0c;display:grid;place-items:center;font-style:normal;font-weight:800;flex:none}
+
+  /* faq */
+  .faq{max-width:780px;margin:0 auto}
+  details{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--display);font-size:1.5rem;text-transform:uppercase;font-weight:900;padding:10px 0;letter-spacing:.01em}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--sans);font-size:1.8rem;color:var(--lime);transition:transform .35s var(--ease);flex:none}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);padding:0 0 22px;max-width:42rem}
+
+  /* apply */
+  .apply{overflow:hidden;background:radial-gradient(45% 60% at 10% 0%,rgba(198,255,61,.1),transparent),var(--bg)}
+  .apply-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+  .spots{display:flex;align-items:center;gap:12px;margin-top:26px;font-weight:700}
+  .spots .meter{display:flex;gap:5px}
+  .spots .meter i{width:14px;height:26px;border-radius:4px;background:var(--lime)}
+  .spots .meter i.x{background:var(--card2)}
+  .formbox{background:var(--card);border:1px solid var(--line);border-radius:32px;padding:34px 30px}
+  .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .formgrid .full{grid-column:1/-1}
+  .formbox .btn{margin-top:22px;width:100%}
+  .success{background:rgba(198,255,61,.1);border:1px solid var(--lime);border-radius:24px;padding:28px}
+  .success h3{color:var(--lime);margin-bottom:10px}
+
+  footer.site{background:#060607;border-top:1px solid var(--line);padding:56px 0 40px;font-size:15px;color:var(--muted)}
+  footer.site .cols{display:flex;gap:32px;justify-content:space-between;flex-wrap:wrap}
+  footer.site a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+  footer.site a:hover{color:var(--lime)}
+  footer.site ul{list-style:none;padding:0}
+  footer.site .logo{color:#fff}
+  footer.site .fine{margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:14px}
+
+  .sticky-cta{display:none}
+
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:1000px){
+    .steps,.cards{grid-template-columns:repeat(2,1fr)}
+    .hero-grid,.planner-grid,.apply-grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .prices,.team,.quotes{grid-template-columns:1fr}
+    .price.feat{transform:none}
+    .team{gap:44px}
+    .story{grid-template-columns:1fr}
+    .stories{grid-template-columns:1fr}
+  }
+  /* mobile */
+  @media (max-width:760px){
+    body{padding-bottom:92px}
+    section{padding:64px 0}
+    .hero{padding:28px 0 56px}
+    #burger{display:inline-flex}
+    .js nav{display:none;width:100%;order:3;padding-bottom:12px}
+    .js nav.open{display:block}
+    nav ul{flex-direction:column;align-items:stretch;gap:2px}
+    nav a{font-size:17px;padding:0 16px}
+    html:not(.js) nav ul{flex-wrap:wrap}
+    h1{font-size:clamp(2.3rem,11.4vw,3.6rem)}
+    h2{font-size:2.4rem}
+    .hero p.lead{font-size:1.05rem;margin:18px 0 24px}
+    .facts{gap:20px;margin-top:28px}
+    .actions .btn{width:100%}
+    .steps,.cards{grid-template-columns:1fr}
+    .panel{padding:24px 18px}
+    .week{gap:5px}
+    .day{min-height:88px;padding:8px 2px;font-size:13px}
+    .day strong{font-size:13px;word-break:break-word}
+    .sum{grid-template-columns:1fr 1fr 1fr;gap:8px}
+    .sum div{padding:12px 8px}
+    .calc-grid,.formgrid{grid-template-columns:1fr}
+    .formbox{padding:26px 18px}
+    .stats{gap:26px 14px}
+    .stat b{font-size:2.6rem}
+    .story{padding:22px 18px}
+    .story blockquote{font-size:1.4rem}
+    .js .toggle{display:flex}
+    .toggle button{flex:1}
+    summary{font-size:1.25rem}
+    .sticky-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:40;min-height:56px;align-items:center;justify-content:center;background:var(--lime);color:#0a0a0c;border-radius:12px;font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 0 1px rgba(10,10,12,.4)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .ring .arc{stroke-dashoffset:150}
+    .js .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo">Demo website — the brand is fictional.</div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="FORGE, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="12" width="4" height="8" rx="1" fill="#c6ff3d"/><rect x="7" y="8" width="4" height="16" rx="1" fill="#c6ff3d"/><rect x="11" y="15" width="10" height="2" fill="#f4f4f6"/><rect x="21" y="8" width="4" height="16" rx="1" fill="#c6ff3d"/><rect x="26" y="12" width="4" height="8" rx="1" fill="#c6ff3d"/></svg>
+      <span>FORG<i>E</i></span>
+    </a>
+    <button id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span></span></button>
+    <nav id="nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#builder">Plan builder</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#plans">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="nav-cta" href="#apply">Apply</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Online coaching · 12-week programmes</span>
+      <h1>Build the body you'll <span>keep.</span></h1>
+      <p class="lead">Personal training and nutrition coaching built around your schedule, your gym and your goals. A real coach checks in every week. No generic PDFs.</p>
+      <div class="actions">
+        <a class="btn" href="#apply">Start my transformation</a>
+        <a class="btn ghost" href="#builder">Try the free plan builder</a>
+      </div>
+      <div class="facts">
+        <div><b>400+</b>clients coached</div>
+        <div><b>94%</b>finish the 12 weeks</div>
+        <div><b>4.9</b>from 286 reviews</div>
+      </div>
+    </div>
+    <div class="dash" role="img" aria-label="Sample progress dashboard: week 9 of 12, 4 of 5 workouts done this week">
+      <div class="dash-top"><span>Your programme</span><b>Week 9 / 12</b></div>
+      <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#1d1d24" stroke-width="16"/>
+        <circle class="arc" cx="100" cy="100" r="86" fill="none" stroke="#c6ff3d" stroke-width="16" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+        <text x="100" y="98" text-anchor="middle" fill="#f4f4f6" font-family="Arial Narrow,Arial,sans-serif" font-weight="900" font-size="54">75%</text>
+        <text x="100" y="124" text-anchor="middle" fill="#a8a8b5" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">COMPLETE</text>
+      </svg>
+      <div class="bars" aria-hidden="true">
+        <i class="on" style="--h:70%;--i:0"></i><i class="on" style="--h:88%;--i:1"></i><i style="--h:30%;--i:2"></i><i class="on" style="--h:100%;--i:3"></i><i class="on" style="--h:76%;--i:4"></i><i style="--h:20%;--i:5"></i><i style="--h:20%;--i:6"></i>
+      </div>
+      <div class="bar-days" aria-hidden="true"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+      <div class="dash-foot"><span>This week <b>4 / 5</b> workouts</span><span>Weight <b>-6.1 kg</b></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div>
+  <span>Strength</span><b>✦</b><span>Fat loss</span><b>✦</b><span>Muscle</span><b>✦</b><span>Nutrition</span><b>✦</b><span>Mobility</span><b>✦</b><span>Habits</span><b>✦</b>
+  <span>Strength</span><b>✦</b><span>Fat loss</span><b>✦</b><span>Muscle</span><b>✦</b><span>Nutrition</span><b>✦</b><span>Mobility</span><b>✦</b><span>Habits</span><b>✦</b>
+</div></div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">How it works</span><h2>Simple on purpose. <span>You train, I adjust.</span></h2><p class="lead">Four steps from the first message to a body you recognise and a routine you can hold.</p></div>
+    <div class="steps">
+      <article class="step reveal"><span class="n">01</span><h3>Intake call</h3><p>A 20-minute chat about goals, injuries, schedule and the equipment you really have.</p><span class="tag">Day 1 · free</span></article>
+      <article class="step reveal"><span class="n">02</span><h3>Custom plan</h3><p>Weekly workouts and a meal plan land in the app within 48 hours, with video demos.</p><span class="tag">Within 48 h</span></article>
+      <article class="step reveal"><span class="n">03</span><h3>Weekly check-in</h3><p>Send your numbers and a form video. You get written feedback and plan updates every week.</p><span class="tag">Every week</span></article>
+      <article class="step reveal"><span class="n">04</span><h3>Keep it</h3><p>In week 12 you get a maintenance plan, so the results stay when the coaching ends.</p><span class="tag">Week 12</span></article>
+    </div>
+  </div>
+</section>
+
+<section id="programmes" class="programs">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Programmes</span><h2>Pick the <span>goal</span>, we build the rest</h2><p class="lead">Every programme runs 12 weeks, in a gym or at home, and is rebuilt around your progress.</p></div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="art"><svg viewBox="0 0 120 120" fill="none" stroke="#c6ff3d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M44 40c0-10 6-16 16-16s16 6 16 16"/><path d="M36 44h48l8 54c0 6-4 8-8 8H36c-4 0-8-2-8-8z" fill="#15151a"/><path d="M48 66h24" stroke="#f4f4f6"/></svg></div>
+        <span class="meta">Fat loss · 4–5 days</span><h3>Shred 12</h3><p>Lift to keep muscle, eat in a smart deficit, finish with short cardio. Steady, not starving.</p>
+        <ul><li>Meal plan</li><li>Steps target</li><li>Gym or home</li></ul>
+      </article>
+      <article class="card reveal">
+        <div class="art"><svg viewBox="0 0 120 120" fill="none" stroke="#c6ff3d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="40" width="14" height="40" rx="3" fill="#15151a"/><rect x="28" y="32" width="14" height="56" rx="3" fill="#15151a"/><path d="M42 60h36" stroke="#f4f4f6"/><rect x="78" y="32" width="14" height="56" rx="3" fill="#15151a"/><rect x="92" y="40" width="14" height="40" rx="3" fill="#15151a"/></svg></div>
+        <span class="meta">Muscle · 4–6 days</span><h3>Size Lab</h3><p>Higher volume, smart progression and a small calorie surplus. Gain muscle, not just weight.</p>
+        <ul><li>Push / Pull / Legs</li><li>Surplus plan</li></ul>
+      </article>
+      <article class="card reveal">
+        <div class="art"><svg viewBox="0 0 120 120" fill="none" stroke="#c6ff3d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 60h100" stroke="#f4f4f6"/><rect x="18" y="26" width="12" height="68" rx="3" fill="#15151a"/><rect x="32" y="36" width="10" height="48" rx="3" fill="#15151a"/><rect x="90" y="36" width="10" height="48" rx="3" fill="#15151a"/><rect x="102" y="26" width="12" height="68" rx="3" fill="#15151a" transform="translate(-14 0)"/></svg></div>
+        <span class="meta">Strength · 3–4 days</span><h3>Barbell Base</h3><p>Squat, bench, deadlift, press. Low reps, long rests and numbers that go up every month.</p>
+        <ul><li>Linear progression</li><li>Form reviews</li></ul>
+      </article>
+      <article class="card reveal">
+        <div class="art"><svg viewBox="0 0 120 120" fill="none" stroke="#c6ff3d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="60" cy="60" r="38" fill="#15151a"/><path d="M50 42l30 18-30 18z" fill="#c6ff3d"/></svg></div>
+        <span class="meta">Beginners · 2–3 days</span><h3>Day One</h3><p>Never trained, or restarting after a break? Short sessions, technique first, habits that stick.</p>
+        <ul><li>20–40 min</li><li>No gym needed</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="builder">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Free plan builder</span><h2>See your week <span>in ten seconds</span></h2><p class="lead">Choose a goal, how many days you can train and your level. Then check your daily calories below.</p></div>
+    <div class="planner-grid">
+      <div class="panel reveal">
+        <form id="planner" novalidate>
+          <fieldset><legend>Your goal</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="goal" value="fat" checked><span>Lose fat</span></label>
+              <label class="chip"><input type="radio" name="goal" value="muscle"><span>Build muscle</span></label>
+              <label class="chip"><input type="radio" name="goal" value="strength"><span>Get stronger</span></label>
+              <label class="chip"><input type="radio" name="goal" value="start"><span>Just start</span></label>
+            </div></fieldset>
+          <fieldset><legend>Days per week</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="days" value="2"><span>2</span></label>
+              <label class="chip"><input type="radio" name="days" value="3" checked><span>3</span></label>
+              <label class="chip"><input type="radio" name="days" value="4"><span>4</span></label>
+              <label class="chip"><input type="radio" name="days" value="5"><span>5</span></label>
+              <label class="chip"><input type="radio" name="days" value="6"><span>6</span></label>
+            </div></fieldset>
+          <fieldset><legend>Experience</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="level" value="0" checked><span>Beginner</span></label>
+              <label class="chip"><input type="radio" name="level" value="1"><span>Intermediate</span></label>
+              <label class="chip"><input type="radio" name="level" value="2"><span>Advanced</span></label>
+            </div></fieldset>
+        </form>
+        <p class="note">Pure demo logic. Real plans also account for injuries, equipment and sleep.</p>
+      </div>
+      <div class="panel reveal">
+        <h3>Your sample week</h3>
+        <div class="week" id="week" aria-hidden="true"></div>
+        <div class="sum" aria-live="polite">
+          <div><b id="s-days">3</b><span>sessions / week</span></div>
+          <div><b id="s-sets">2–3</b><span>sets per move</span></div>
+          <div><b id="s-reps">10–15</b><span>reps</span></div>
+        </div>
+        <p class="plan-note" id="plan-note" aria-live="polite">Pick options on the left to see your week. A default plan: 3 full-body sessions with short cardio finishers.</p>
+        <a class="btn small" href="#apply">Get this plan built for me</a>
+
+        <div class="calc">
+          <h3>Daily calories</h3>
+          <form id="calc" novalidate>
+            <div class="calc-grid">
+              <div class="field"><label for="c-sex">Sex</label><select id="c-sex" name="sex" autocomplete="sex"><option value="m">Male</option><option value="f">Female</option></select></div>
+              <div class="field"><label for="c-age">Age</label><input id="c-age" type="number" inputmode="numeric" autocomplete="off" min="16" max="80" value="28"><span class="err" id="e-age" role="alert"></span></div>
+              <div class="field"><label for="c-w">Weight, kg</label><input id="c-w" type="number" inputmode="decimal" autocomplete="off" min="35" max="250" value="78"><span class="err" id="e-w" role="alert"></span></div>
+              <div class="field"><label for="c-h">Height, cm</label><input id="c-h" type="number" inputmode="numeric" autocomplete="off" min="120" max="230" value="178"><span class="err" id="e-h" role="alert"></span></div>
+            </div>
+            <div class="calc-out" id="calc-out" aria-live="polite">Fill in your numbers and the result appears here.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results" class="results">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Results</span><h2>Real clients. <span>Real numbers.</span></h2><p class="lead">Average results after one 12-week programme, and three stories behind them.</p></div>
+    <div class="stats">
+      <div class="stat reveal"><b>-7.4 kg</b><span>average fat loss</span></div>
+      <div class="stat reveal"><b>+18%</b><span>strength gain</span></div>
+      <div class="stat reveal"><b>94%</b><span>finish the programme</span></div>
+      <div class="stat reveal"><b>400+</b><span>clients coached</span></div>
+    </div>
+
+    <div class="slider" role="region" aria-roledescription="carousel" aria-label="Client stories">
+      <div class="stories" id="stories" aria-live="polite">
+        <article class="story on">
+          <div><blockquote>“I stopped dieting and started training. Twelve weeks later my jeans were two sizes down.”</blockquote><cite>Daniel, 34, accountant · Shred 12</cite></div>
+          <div class="chart"><svg viewBox="0 0 240 110" role="img" aria-label="Weight over 12 weeks, falling from 92 to 84.6 kilograms"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c6ff3d" stop-opacity=".35"/><stop offset="1" stop-color="#c6ff3d" stop-opacity="0"/></linearGradient></defs><path d="M8 20 L40 26 L72 38 L104 46 L136 56 L168 70 L200 78 L232 88 V104 H8Z" fill="url(#g1)"/><path d="M8 20 L40 26 L72 38 L104 46 L136 56 L168 70 L200 78 L232 88" fill="none" stroke="#c6ff3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="232" cy="88" r="5" fill="#c6ff3d"/></svg><p><span>Week 1: <b>92 kg</b></span><span>Week 12: <b>84.6 kg</b></span></p></div>
+        </article>
+        <article class="story">
+          <div><blockquote>“First time I deadlifted my bodyweight twice. The weekly feedback kept me honest.”</blockquote><cite>Amira, 29, nurse · Barbell Base</cite></div>
+          <div class="chart"><svg viewBox="0 0 240 110" role="img" aria-label="Deadlift rising from 80 to 125 kilograms"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c6ff3d" stop-opacity=".35"/><stop offset="1" stop-color="#c6ff3d" stop-opacity="0"/></linearGradient></defs><path d="M8 94 L40 90 L72 80 L104 72 L136 58 L168 44 L200 30 L232 18 V104 H8Z" fill="url(#g2)"/><path d="M8 94 L40 90 L72 80 L104 72 L136 58 L168 44 L200 30 L232 18" fill="none" stroke="#c6ff3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="232" cy="18" r="5" fill="#c6ff3d"/></svg><p><span>Week 1: <b>80 kg</b></span><span>Week 12: <b>125 kg</b></span></p></div>
+        </article>
+        <article class="story">
+          <div><blockquote>“Three kids, no time. Thirty minutes at home, three times a week, and I feel strong again.”</blockquote><cite>Rachel, 41, teacher · Day One</cite></div>
+          <div class="chart"><svg viewBox="0 0 240 110" role="img" aria-label="Weekly workouts rising from 0 to 3 and staying there"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c6ff3d" stop-opacity=".35"/><stop offset="1" stop-color="#c6ff3d" stop-opacity="0"/></linearGradient></defs><path d="M8 100 L40 84 L72 60 L104 44 L136 32 L168 32 L200 30 L232 30 V104 H8Z" fill="url(#g3)"/><path d="M8 100 L40 84 L72 60 L104 44 L136 32 L168 32 L200 30 L232 30" fill="none" stroke="#c6ff3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="232" cy="30" r="5" fill="#c6ff3d"/></svg><p><span>Week 1: <b>0 workouts</b></span><span>Week 12: <b>3 / week</b></span></p></div>
+        </article>
+      </div>
+      <div class="slider-ctl">
+        <button type="button" id="prev" aria-label="Previous story">←</button>
+        <button type="button" id="next" aria-label="Next story">→</button>
+        <span class="count" id="count">1 / 3</span>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coaches">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Your coaches</span><h2>Real people. <span>Real feedback.</span></h2><p class="lead">Certified coaches who reply within a day, not a chatbot and not a call centre.</p></div>
+    <div class="team">
+      <article class="coach reveal">
+        <svg viewBox="0 0 280 320" role="img" aria-label="Abstract portrait of Jake"><path d="M20 320V130C20 50 80 10 140 10s120 40 120 120v190z" fill="#1d1d24"/><path d="M52 320c0-62 40-94 88-94s88 32 88 94z" fill="#c6ff3d"/><circle cx="140" cy="140" r="46" fill="#d9a98a"/><path d="M94 128c4-34 24-48 46-48s42 14 46 48c-12-14-28-20-46-20s-34 6-46 20z" fill="#2b221e"/><circle cx="226" cy="70" r="20" fill="#c6ff3d" opacity=".25"/></svg>
+        <h3>Jake Moreno</h3><span class="role">Head coach · Strength</span><p>Ex-competitive powerlifter. Twelve years of coaching, obsessed with clean technique.</p>
+      </article>
+      <article class="coach reveal">
+        <svg viewBox="0 0 280 320" role="img" aria-label="Abstract portrait of Priya"><path d="M20 320V130C20 50 80 10 140 10s120 40 120 120v190z" fill="#1d1d24"/><path d="M56 320c0-60 38-92 84-92s84 32 84 92z" fill="#ff7a59"/><circle cx="140" cy="142" r="46" fill="#a9755a"/><path d="M84 150c-16-70 30-96 58-96s76 26 56 96c-4-30-20-52-56-52s-54 22-58 52z" fill="#1d1a19"/><circle cx="58" cy="262" r="24" fill="#ff7a59" opacity=".25"/></svg>
+        <h3>Priya Nair</h3><span class="role">Nutrition &amp; fat loss</span><p>Registered dietitian. Builds meal plans that fit real life, birthdays and takeaways included.</p>
+      </article>
+      <article class="coach reveal">
+        <svg viewBox="0 0 280 320" role="img" aria-label="Abstract portrait of Sam"><path d="M20 320V130C20 50 80 10 140 10s120 40 120 120v190z" fill="#1d1d24"/><path d="M60 320c0-60 36-92 80-92s80 32 80 92z" fill="#f4f4f6"/><circle cx="140" cy="140" r="46" fill="#8a5a44"/><path d="M96 124c6-26 22-40 44-40s38 14 44 40c-10-10-26-14-44-14s-34 4-44 14z" fill="#111"/><path d="M104 172c8 14 56 14 64 0-6 24-58 24-64 0z" fill="#111"/><circle cx="60" cy="80" r="18" fill="#c6ff3d" opacity=".25"/></svg>
+        <h3>Sam Okafor</h3><span class="role">Muscle &amp; mobility</span><p>Physio-trained. Fixes the stiff hips and sore shoulders that quietly stall your progress.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="plans" class="programs">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Pricing</span><h2>Pick your <span>plan</span></h2><p class="lead">Cancel any time. First-week money-back guarantee. No contracts, no joining fees.</p>
+      <div class="toggle" role="group" aria-label="Billing period">
+        <button type="button" id="bill-m" aria-pressed="true">Monthly</button>
+        <button type="button" id="bill-y" aria-pressed="false">Yearly<em>save 20%</em></button>
+      </div>
+    </div>
+    <div class="prices">
+      <article class="price reveal">
+        <h3>Starter</h3><div class="amt"><span class="p" data-m="49" data-y="39">£49</span><small> / mo</small></div><div class="bill">Billed monthly</div>
+        <ul><li>Custom workout plan</li><li>Plan update every month</li><li>In-app chat support</li><li>Exercise video library</li></ul>
+        <a class="btn" href="#apply">Choose Starter</a>
+      </article>
+      <article class="price feat reveal">
+        <span class="tag">Most popular</span><h3>Coaching</h3><div class="amt"><span class="p" data-m="99" data-y="79">£99</span><small> / mo</small></div><div class="bill">Billed monthly</div>
+        <ul><li>Workouts + nutrition plan</li><li>Weekly check-ins</li><li>Form feedback by video</li><li>Plan rebuilt every 4 weeks</li></ul>
+        <a class="btn" href="#apply">Choose Coaching</a>
+      </article>
+      <article class="price reveal">
+        <h3>Elite</h3><div class="amt"><span class="p" data-m="189" data-y="149">£189</span><small> / mo</small></div><div class="bill">Billed monthly</div>
+        <ul><li>Everything in Coaching</li><li>Daily messaging</li><li>Monthly video call</li><li>Priority replies in 4 hours</li></ul>
+        <a class="btn" href="#apply">Choose Elite</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="voices" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Reviews</span><h2>What clients <span>say</span></h2></div>
+    <div class="quotes">
+      <figure class="quote reveal"><div class="stars" aria-label="5 out of 5">★★★★★</div><p>“Best money I've spent on myself. I always know exactly what to do next in the gym.”</p><footer><i>M</i>Marcus, 37, engineer</footer></figure>
+      <figure class="quote reveal"><div class="stars" aria-label="5 out of 5">★★★★★</div><p>“The meal plan works with my night shifts. Lost 9 kg and never felt hungry.”</p><footer><i>L</i>Lauren, 31, paramedic</footer></figure>
+      <figure class="quote reveal"><div class="stars" aria-label="5 out of 5">★★★★★</div><p>“Fast replies, honest feedback, zero judgement. My squat is up 40 kg in three months.”</p><footer><i>O</i>Oliver, 45, sales manager</footer></figure>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="programs">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">FAQ</span><h2>Good <span>questions</span></h2></div>
+    <div class="faq reveal">
+      <details><summary>Do I need a gym?</summary><p>No. Every programme has a gym version and a home version using dumbbells, bands or just your bodyweight. Tell me what you have on the intake call.</p></details>
+      <details><summary>I'm a complete beginner. Is this for me?</summary><p>Yes. Day One is built for people who have never trained. Every exercise has a video demo, and you can send me clips for feedback.</p></details>
+      <details><summary>How much time will I need?</summary><p>Most sessions take 30–60 minutes. The weekly check-in takes about ten minutes.</p></details>
+      <details><summary>What if it isn't working?</summary><p>You get a full refund in the first week, no questions. After that, I rebuild your plan from your numbers, and you can cancel any time.</p></details>
+      <details><summary>Can you work around injuries?</summary><p>Often, yes. I modify movements and loads around niggles. For anything medical, I'll ask you to check with your doctor first.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="apply">
+  <div class="wrap apply-grid">
+    <div class="reveal">
+      <span class="eyebrow">Apply</span>
+      <h2>Ready to <span>start?</span></h2>
+      <p class="lead">Tell me about your goal. I reply within 24 hours with a time for your free intake call.</p>
+      <div class="spots"><span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i></span><span>8 spots left this month</span></div>
+      <p class="note">FORGE Coaching, 21 Foundry Lane, Manchester (fictional address).</p>
+    </div>
+    <div class="formbox reveal">
+      <form id="applyform" novalidate>
+        <div class="formgrid">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="given-name" required><span class="err" id="e-name" role="alert"></span></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" required><span class="err" id="e-email" role="alert"></span></div>
+          <div class="field"><label for="phone">Phone (optional)</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="07123 456789"><span class="err" id="e-phone" role="alert"></span></div>
+          <div class="field"><label for="goal">Main goal</label><select id="goal" name="goal" required autocomplete="off"><option value="">Choose…</option><option>Lose fat</option><option>Build muscle</option><option>Get stronger</option><option>Just get started</option></select><span class="err" id="e-goal" role="alert"></span></div>
+          <div class="field full"><label for="where">Where will you train?</label><select id="where" name="where" required autocomplete="off"><option value="">Choose…</option><option>Gym</option><option>Home</option><option>Both</option></select><span class="err" id="e-where" role="alert"></span></div>
+          <div class="field full"><label for="msg">Anything I should know? (optional)</label><textarea id="msg" name="msg" autocomplete="off" placeholder="Injuries, schedule, past attempts…"></textarea></div>
+        </div>
+        <button class="btn" type="submit">Apply now</button>
+        <p class="note">No payment needed. This is a demo form, nothing is sent.</p>
+      </form>
+      <div class="success" id="success" role="status" tabindex="-1" hidden></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><a class="logo" href="#top">FORG<i>E</i></a><p>21 Foundry Lane, Manchester</p></div>
+      <ul>
+        <li><a href="#how">How it works</a></li><li><a href="#builder">Plan builder</a></li><li><a href="#plans">Pricing</a></li><li><a href="#apply">Apply</a></li>
+      </ul>
+    </div>
+    <p class="fine">Demo website made for a portfolio. FORGE, its coaches, reviews and prices are fictional.</p>
+  </div>
+</footer>
+
+<a class="sticky-cta" href="#apply">Start my transformation</a>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+  // burger
+  var burger = $('burger'), nav = $('nav');
+  function setNav(open){
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  burger.addEventListener('click', function(){ setNav(burger.getAttribute('aria-expanded') !== 'true'); });
+  nav.addEventListener('click', function(e){ if (e.target.closest('a')) setNav(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setNav(false); });
+
+  // plan builder
+  var SPLIT = {
+    2:['Full body A','Full body B'],
+    3:['Full body A','Full body B','Full body C'],
+    4:['Upper','Lower','Upper','Lower'],
+    5:['Push','Pull','Legs','Upper','Lower'],
+    6:['Push','Pull','Legs','Push','Pull','Legs']
+  };
+  var SLOT = {2:[0,3],3:[0,2,4],4:[0,1,3,4],5:[0,1,2,4,5],6:[0,1,2,3,4,5]};
+  var DN = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var GOAL = {
+    fat:{reps:'10–15', note:'Lifting keeps your muscle while you lose fat. Add a 15-minute cardio finisher to two sessions and aim for 8,000 steps a day.'},
+    muscle:{reps:'6–12', note:'Train each muscle about twice a week, add weight or a rep whenever you can, and eat slightly above maintenance.'},
+    strength:{reps:'3–6', note:'Heavy compound lifts with long rests. Your top sets are tracked weekly and the load goes up in small steps.'},
+    start:{reps:'8–12', note:'Technique first. Easy weights, full range, stop two reps before failure. Consistency beats intensity for the first month.'}
+  };
+  var SETS = ['2–3','3–4','4–5'], MINS = [40,55,70];
+  var planner = $('planner'), week = $('week');
+  function val(name){ return planner.querySelector('input[name="'+name+'"]:checked').value; }
+  var dumb = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 8v4M5 6v8M5 10h10M15 6v8M18 8v4" stroke="#c6ff3d" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+  function renderPlan(){
+    var g = val('goal'), d = +val('days'), l = +val('level');
+    var names = SPLIT[d], slots = SLOT[d], html = '', k = 0;
+    for (var i = 0; i < 7; i++){
+      if (slots.indexOf(i) > -1){ html += '<div class="day train"><b>'+DN[i]+'</b>'+dumb+'<strong>'+names[k++]+'</strong></div>'; }
+      else { html += '<div class="day"><b>'+DN[i]+'</b><span>Rest</span></div>'; }
+    }
+    week.innerHTML = html;
+    $('s-days').textContent = d;
+    $('s-sets').textContent = SETS[l];
+    $('s-reps').textContent = GOAL[g].reps;
+    var cardio = g === 'fat' ? ' plus two 15-minute cardio finishers' : '';
+    $('plan-note').textContent = d + ' sessions of about ' + MINS[l] + ' minutes' + cardio + '. ' + GOAL[g].note;
+    calc();
+  }
+  planner.addEventListener('change', renderPlan);
+
+  // calories
+  var calcForm = $('calc');
+  var ACT = {2:1.375,3:1.45,4:1.55,5:1.675,6:1.725};
+  var ADJ = {fat:-0.2, muscle:0.1, strength:0.05, start:0};
+  var PRO = {fat:2.0, muscle:1.8, strength:1.8, start:1.6};
+  function calc(){
+    var age = $('c-age'), w = $('c-w'), h = $('c-h'), out = $('calc-out'), ok = true;
+    [[age,16,80,'e-age','Enter an age from 16 to 80.'],[w,35,250,'e-w','Enter a weight from 35 to 250 kg.'],[h,120,230,'e-h','Enter a height from 120 to 230 cm.']].forEach(function(r){
+      var v = parseFloat(r[0].value), bad = !(v >= r[1] && v <= r[2]);
+      $(r[3]).textContent = bad && r[0].value !== '' ? r[4] : '';
+      if (bad && r[0].value !== '') r[0].setAttribute('aria-invalid','true'); else r[0].removeAttribute('aria-invalid');
+      if (bad) ok = false;
+    });
+    if (!ok){ out.textContent = 'Fill in valid numbers and the result appears here.'; return; }
+    var s = $('c-sex').value === 'm' ? 5 : -161;
+    var bmr = 10 * parseFloat(w.value) + 6.25 * parseFloat(h.value) - 5 * parseFloat(age.value) + s;
+    var g = val('goal'), d = +val('days');
+    var maint = bmr * ACT[d], target = Math.round(maint * (1 + ADJ[g]) / 10) * 10;
+    var pro = Math.round(PRO[g] * parseFloat(w.value) / 5) * 5;
+    out.innerHTML = 'Target: <b>' + target.toLocaleString('en-GB') + ' kcal</b> a day<br>Protein: <strong>' + pro + ' g</strong> · Maintenance: <strong>' + (Math.round(maint / 10) * 10).toLocaleString('en-GB') + ' kcal</strong>';
+  }
+  calcForm.addEventListener('input', calc);
+  calcForm.addEventListener('submit', function(e){ e.preventDefault(); calc(); });
+  renderPlan();
+
+  // stories slider
+  var stories = [].slice.call(document.querySelectorAll('.story')), idx = 0, dots = $('dots');
+  stories.forEach(function(_, i){
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Show story ' + (i + 1));
+    b.addEventListener('click', function(){ show(i); }); dots.appendChild(b);
+  });
+  function show(i){
+    idx = (i + stories.length) % stories.length;
+    stories.forEach(function(s, k){ s.classList.toggle('on', k === idx); });
+    [].forEach.call(dots.children, function(b, k){ if (k === idx) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current'); });
+    $('count').textContent = (idx + 1) + ' / ' + stories.length;
+  }
+  $('prev').addEventListener('click', function(){ show(idx - 1); });
+  $('next').addEventListener('click', function(){ show(idx + 1); });
+  $('stories').parentNode.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') show(idx - 1); else if (e.key === 'ArrowRight') show(idx + 1);
+  });
+  show(0);
+
+  // billing toggle
+  var bm = $('bill-m'), by = $('bill-y');
+  function bill(yearly){
+    bm.setAttribute('aria-pressed', yearly ? 'false' : 'true');
+    by.setAttribute('aria-pressed', yearly ? 'true' : 'false');
+    [].forEach.call(document.querySelectorAll('.price .p'), function(p){ p.textContent = '£' + (yearly ? p.dataset.y : p.dataset.m); });
+    [].forEach.call(document.querySelectorAll('.price .bill'), function(b){ b.textContent = yearly ? 'Billed yearly, 20% off' : 'Billed monthly'; });
+  }
+  bm.addEventListener('click', function(){ bill(false); });
+  by.addEventListener('click', function(){ bill(true); });
+
+  // apply form
+  var form = $('applyform'), box = $('success');
+  var rules = [
+    ['name', function(v){ return v.trim() ? '' : 'Enter your name.'; }],
+    ['email', function(v){ return validEmail(v.trim()) ? '' : 'Enter a valid email, for example name@example.com.'; }],
+    ['phone', function(v){ return !v.trim() || /^[+\d][\d\s.\-]{8,18}$/.test(v.trim()) ? '' : 'That number looks incomplete. Example: 07123 456789.'; }],
+    ['goal', function(v){ return v ? '' : 'Choose your main goal.'; }],
+    ['where', function(v){ return v ? '' : 'Choose where you will train.'; }]
+  ];
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var first = null;
+    rules.forEach(function(r){
+      var el = $(r[0]), msg = r[1](el.value), out = $('e-' + r[0]);
+      out.textContent = msg;
+      if (msg){ el.setAttribute('aria-invalid','true'); el.setAttribute('aria-describedby', out.id); if (!first) first = el; }
+      else el.removeAttribute('aria-invalid');
+    });
+    if (first){ first.focus(); return; }
+    box.innerHTML = '<h3>Thanks ' + esc($('name').value.trim()) + ', you are in the queue.</h3><p>Goal: ' + esc($('goal').value.toLowerCase()) + '. I will email ' + esc($('email').value.trim()) + ' within 24 hours with a time for your free intake call. (Demo: nothing was sent.)</p>';
+    form.hidden = true; box.hidden = false; box.focus();
+  });
+  rules.forEach(function(r){
+    $(r[0]).addEventListener('input', function(){ this.removeAttribute('aria-invalid'); $('e-' + r[0]).textContent = ''; });
+  });
+
+  // reveal on scroll
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el, i){ el.style.transitionDelay = (i % 4) * 80 + 'ms'; io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

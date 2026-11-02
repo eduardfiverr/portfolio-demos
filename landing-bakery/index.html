@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Fournil — Boulangerie artisanale à Lyon</title>
+<meta name="description" content="Pains au levain de 24 h, viennoiseries pur beurre et pâtisseries, cuits chaque matin à Lyon 2e. Commandez pour demain.">
+<meta name="theme-color" content="#f3ebdd">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#f3ebdd; --paper-2:#eadcc1; --ink:#1f1610; --muted:#5c4a3b;
+    --crust:#9a4214; --gold:#e3a65b; --line:#1f161026;
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing:border-box; margin:0; }
+  html { scroll-behavior:smooth; scroll-padding-top:84px; overflow-x:clip; -webkit-text-size-adjust:100%; }
+  body { font-family:var(--sans); font-size:1rem; line-height:1.65; color:var(--ink); background:var(--paper); overflow-x:clip; position:relative; }
+  /* paper grain */
+  body::before { content:""; position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.45; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .15  0 0 0 0 .06  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  [hidden] { display:none !important; }
+  a { color:inherit; }
+  img, svg { display:block; max-width:100%; }
+  h1, h2, h3 { font-family:var(--serif); font-weight:400; letter-spacing:-.02em; line-height:1.05; font-optical-sizing:auto; }
+  em { font-style:italic; color:var(--crust); }
+  :focus-visible { outline:3px solid var(--crust); outline-offset:3px; border-radius:6px; }
+  .wrap { width:100%; max-width:1200px; margin:0 auto; padding:0 1.25rem; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .tag { font-family:var(--sans); font-size:.875rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--crust); display:flex; align-items:center; gap:.75rem; }
+  .tag::before { content:""; width:2.5rem; height:1px; background:currentColor; }
+
+  .demo { background:#fff3c4; color:#5c4400; text-align:center; font:.875rem/1.4 var(--sans); padding:.5rem .75rem; position:relative; z-index:70; }
+
+  /* header */
+  header { position:sticky; top:0; z-index:50; background:#f3ebddea; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  header .wrap { display:flex; align-items:center; justify-content:space-between; min-height:68px; }
+  .logo { display:inline-flex; align-items:center; gap:.55rem; min-height:44px; text-decoration:none; font-family:var(--serif); font-size:1.5rem; font-weight:500; letter-spacing:-.02em; }
+  .logo svg { width:20px; height:34px; color:var(--crust); }
+  .logo i { font-style:italic; color:var(--crust); }
+  nav { display:flex; align-items:center; gap:.25rem; }
+  nav a { display:inline-flex; align-items:center; min-height:44px; padding:0 .9rem; text-decoration:none; font-size:.95rem; font-weight:500; border-radius:999px; }
+  nav a:hover { color:var(--crust); }
+  nav a.cta { background:var(--ink); color:var(--paper); margin-left:.5rem; }
+  nav a.cta:hover { background:var(--crust); color:#fff; }
+  .burger { display:none; }
+
+  /* buttons */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:.6rem; min-height:56px; padding:0 2rem; border-radius:999px; background:var(--crust); color:#fff; text-decoration:none; font:600 1rem var(--sans); border:2px solid var(--crust); cursor:pointer; transition:transform .2s, background .2s, color .2s; }
+  .btn:hover { background:var(--ink); border-color:var(--ink); transform:translateY(-2px); }
+  .btn.ghost { background:transparent; color:var(--ink); border-color:var(--ink); }
+  .btn.ghost:hover { background:var(--ink); color:var(--paper); }
+  .btn svg { width:18px; height:18px; }
+
+  /* hero */
+  .hero { padding:3rem 0 4rem; position:relative; }
+  .hero .wrap { display:grid; grid-template-columns:7fr 5fr; gap:2rem; align-items:center; }
+  .hero h1 { font-size:clamp(3.25rem, 11.5vw, 7.5rem); font-weight:350; line-height:.92; letter-spacing:-.045em; margin:1.1rem 0 1.5rem; }
+  .hero h1 em { font-weight:300; }
+  .hero p.lead { font-size:1.15rem; max-width:30rem; color:var(--muted); }
+  .hero .actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.75rem; }
+  .hero-art { position:relative; max-width:440px; width:100%; justify-self:end; margin-top:1rem; }
+  .arch { aspect-ratio:4/5; border-radius:999px 999px 24px 24px; overflow:hidden; background:linear-gradient(180deg,#f1d39c 0%,#e7b86b 62%,#c98a45 100%); box-shadow:0 40px 60px -30px #3b241880; }
+  .arch svg { width:100%; height:100%; }
+  .stamp { position:absolute; top:-18px; right:-8px; width:132px; height:132px; animation:spin 40s linear infinite; }
+  .hero-card { position:absolute; left:-1.25rem; bottom:2rem; background:var(--ink); color:var(--paper); padding:.9rem 1.1rem; border-radius:14px; box-shadow:0 20px 30px -12px #0006; transform:rotate(-3deg); }
+  .hero-card b { display:block; font-family:var(--serif); font-weight:400; font-size:1.35rem; line-height:1.1; }
+  .hero-card span { font-size:.875rem; color:#cdbfa9; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .hero::after { content:"01"; position:absolute; right:1rem; bottom:.5rem; font-family:var(--serif); font-size:9rem; line-height:1; color:#1f161010; pointer-events:none; }
+
+  /* marquee */
+  .marquee { background:var(--ink); color:var(--paper); overflow:hidden; border-block:1px solid #000; padding:1rem 0; }
+  .marquee .track { display:flex; width:max-content; animation:slide 38s linear infinite; }
+  .marquee ul { display:flex; align-items:center; list-style:none; padding:0; flex-shrink:0; }
+  .marquee li { font-family:var(--serif); font-style:italic; font-size:clamp(1.4rem,3.4vw,2.2rem); white-space:nowrap; display:flex; align-items:center; }
+  .marquee li::after { content:"✦"; font-style:normal; color:var(--gold); font-size:1rem; margin:0 1.6rem; }
+  @keyframes slide { to { transform:translateX(-50%); } }
+
+  /* sections */
+  section { padding:5.5rem 0; position:relative; }
+  h2 { font-size:clamp(2.3rem, 6vw, 4.6rem); font-weight:350; letter-spacing:-.035em; margin:1rem 0 1.25rem; }
+  .section-lead { max-width:34rem; color:var(--muted); font-size:1.1rem; }
+  .divider { width:100%; height:24px; color:#1f161055; }
+  .divider path { vector-effect:non-scaling-stroke; }
+
+  /* carte */
+  .menu-head { display:grid; grid-template-columns:1.3fr 1fr; gap:2rem; align-items:end; margin-bottom:3rem; }
+  .tiles { display:grid; grid-template-columns:repeat(6,1fr); gap:1rem; }
+  .tile { position:relative; display:flex; flex-direction:column; border-radius:22px; overflow:hidden; padding:1.25rem 1.5rem 1.5rem; grid-column:span 2; transition:transform .3s ease; }
+  .tile:hover { transform:translateY(-6px) rotate(-.4deg); }
+  .tile .art { flex:1; display:flex; align-items:center; justify-content:center; padding:1rem .25rem; min-height:150px; }
+  .tile .art svg { width:100%; max-height:190px; }
+  .tile h3 { font-size:1.7rem; font-weight:400; margin-bottom:.3rem; }
+  .tile p { font-size:1rem; opacity:.85; max-width:26rem; }
+  .tile .price { display:inline-block; margin-top:.9rem; font-weight:700; font-size:.95rem; padding:.25rem .8rem; border-radius:999px; border:1.5px solid currentColor; align-self:flex-start; }
+  .t1 { grid-row:span 2; background:#e4c99a; border-radius:999px 999px 22px 22px; padding-top:3rem; text-align:center; align-items:center; }
+  .t1 .price { align-self:center; }
+  .t1 .art svg { max-height:260px; }
+  .t2 { background:#1f1610; color:var(--paper); grid-column:span 4; flex-direction:row; align-items:center; gap:1.5rem; }
+  .t2 .art { flex:1.1; }
+  .t2 .info { flex:1; }
+  .t3 { background:#f0cfa5; }
+  .t4 { background:#f6df83; }
+  .t5 { background:#cdd5bd; grid-column:3 / span 2; }
+  .t6 { background:var(--crust); color:#fff; grid-column:span 4; flex-direction:row; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
+  .t6 .big { font-family:var(--serif); font-size:clamp(3.5rem,9vw,6rem); line-height:1; letter-spacing:-.04em; }
+  .t6 .info { max-width:30rem; }
+  .t6 .price { border-color:#fff; }
+
+  /* atelier */
+  .atelier { background:var(--paper-2); }
+  .atelier .wrap { display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; align-items:start; }
+  .atelier .copy p { color:var(--muted); font-size:1.1rem; margin-bottom:1rem; max-width:34rem; }
+  .steps { list-style:none; padding:0; margin-top:2rem; display:grid; gap:0; border-top:1px solid var(--line); }
+  .steps li { display:flex; align-items:baseline; gap:1.25rem; padding:.9rem 0; border-bottom:1px solid var(--line); font-size:1.05rem; }
+  .steps b { font-family:var(--serif); font-style:italic; font-weight:400; color:var(--crust); font-size:1.5rem; min-width:2.2rem; }
+  .stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; position:relative; }
+  .stat { background:var(--paper); border-radius:20px; padding:1.5rem 1.25rem; border:1px solid var(--line); }
+  .stat:nth-child(2) { transform:translateY(2rem); }
+  .stat:nth-child(4) { transform:translateY(2rem); }
+  .stat .n { font-family:var(--serif); font-size:clamp(3.4rem,6vw,5rem); line-height:1; letter-spacing:-.04em; color:var(--crust); display:flex; align-items:baseline; gap:.3rem; }
+  .stat .n small { font-size:1.4rem; font-style:italic; letter-spacing:0; }
+  .stat p { margin-top:.6rem; font-size:1rem; color:var(--muted); line-height:1.4; }
+  .atelier .wheat-deco { position:absolute; right:-1rem; top:1.5rem; width:60px; height:200px; color:#9a421428; transform:rotate(14deg); pointer-events:none; }
+
+  /* horaires */
+  .hours { background:var(--ink); color:var(--paper); }
+  .hours .tag { color:var(--gold); }
+  .hours em { color:var(--gold); }
+  .hours .wrap { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+  .status { display:inline-flex; align-items:center; gap:.7rem; padding:.55rem 1.1rem; border-radius:999px; background:#ffffff14; border:1px solid #ffffff30; font-weight:600; font-size:1rem; margin:.5rem 0 1.5rem; }
+  .status .dot { width:12px; height:12px; border-radius:50%; background:#aaa; flex:none; }
+  .status.open .dot { background:#6fd08c; box-shadow:0 0 0 0 #6fd08c99; animation:pulse 2s infinite; }
+  .status.closed .dot { background:#ff8a6b; }
+  @keyframes pulse { 70% { box-shadow:0 0 0 10px #6fd08c00; } 100% { box-shadow:0 0 0 0 #6fd08c00; } }
+  .hours address { font-style:normal; color:#cdbfa9; font-size:1.05rem; }
+  .hours address a { display:inline-flex; align-items:center; min-height:44px; color:var(--paper); font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:1.1rem; }
+  th { text-align:left; font-weight:400; }
+  td, th { padding:1.1rem .5rem; border-bottom:1px solid #ffffff26; }
+  td:last-child { text-align:right; font-family:var(--serif); font-size:1.4rem; }
+  tr.today { background:#ffffff10; }
+  tr.today th::after { content:"Aujourd'hui"; margin-left:.7rem; font-size:.875rem; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:.08em; }
+
+  /* avis */
+  .reviews .head { max-width:40rem; margin-bottom:3rem; }
+  .quotes { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; align-items:start; }
+  .quote { background:#fffaf0; border:1px solid var(--line); border-radius:22px; padding:2rem 1.75rem; position:relative; }
+  .quote:nth-child(2) { margin-top:2.5rem; background:var(--paper-2); }
+  .quote:nth-child(3) { margin-top:1.25rem; }
+  .quote::before { content:"“"; font-family:var(--serif); font-size:6rem; line-height:.6; color:var(--crust); display:block; height:2.6rem; }
+  .quote blockquote { font-family:var(--serif); font-size:1.35rem; line-height:1.35; letter-spacing:-.01em; }
+  .quote .stars { color:var(--crust); letter-spacing:.15em; font-size:1rem; margin-top:1.25rem; }
+  .quote .who { margin-top:.35rem; font-size:1rem; color:var(--muted); }
+
+  /* commande */
+  .order { padding-top:2rem; }
+  .order .box { background:var(--ink); color:var(--paper); border-radius:32px; padding:4rem; display:grid; grid-template-columns:1fr 1.2fr; gap:3.5rem; position:relative; overflow:hidden; }
+  .order .box::after { content:""; position:absolute; right:-120px; top:-120px; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle,#e3a65b44,#e3a65b00 70%); pointer-events:none; }
+  .order .tag { color:var(--gold); }
+  .order em { color:var(--gold); }
+  .order .copy p { color:#cdbfa9; font-size:1.1rem; max-width:26rem; }
+  form { display:grid; gap:1rem; position:relative; z-index:1; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .field label { display:block; font-weight:600; font-size:1rem; margin-bottom:.35rem; }
+  .field label small { font-weight:400; color:#cdbfa9; font-size:.875rem; }
+  input, select, textarea { width:100%; font:inherit; font-size:1rem; color:var(--ink); background:#fffaf0; border:2px solid transparent; border-radius:12px; padding:.75rem 1rem; min-height:50px; }
+  textarea { min-height:110px; resize:vertical; }
+  input:focus, select:focus, textarea:focus { outline:3px solid var(--gold); outline-offset:2px; }
+  input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border-color:#c23b1b; }
+  .err { color:#ffb199; font-size:.9375rem; margin-top:.3rem; font-weight:500; }
+  .chips { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.6rem; }
+  .chip { min-height:44px; padding:0 1rem; border-radius:999px; border:1.5px solid #ffffff55; background:transparent; color:var(--paper); font:500 .9375rem var(--sans); cursor:pointer; }
+  .chip:hover { background:#ffffff1a; }
+  .order .btn { background:var(--gold); border-color:var(--gold); color:var(--ink); width:100%; }
+  .order .btn:hover { background:var(--paper); border-color:var(--paper); }
+  .done { position:relative; z-index:1; background:#ffffff12; border:1px solid #ffffff30; border-radius:20px; padding:2rem; }
+  .done h3 { font-size:2rem; margin-bottom:.6rem; }
+  .done p { color:#e6dcc9; margin-bottom:1rem; }
+  .done .btn { width:auto; }
+
+  footer { background:var(--ink); color:#cdbfa9; padding:2.5rem 0; font-size:.9375rem; text-align:center; border-top:1px solid #ffffff1f; }
+  footer .big { font-family:var(--serif); font-size:1.6rem; color:var(--paper); display:block; margin-bottom:.4rem; }
+  .sticky-cta { display:none; }
+
+  /* reveal (JS only) */
+  .js .reveal { opacity:0; transform:translateY(28px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .js .reveal.in { opacity:1; transform:none; }
+  .js .stat.reveal.in:nth-child(2), .js .stat.reveal.in:nth-child(4) { transform:translateY(2rem); }
+  .js .quote.reveal.in { transform:none; }
+
+  @media (max-width:980px) {
+    .tiles { grid-template-columns:repeat(2,1fr); }
+    .tile, .t2, .t6, .t5 { grid-column:span 1; }
+    .t1 { grid-column:span 2; grid-row:auto; }
+    .t2, .t6 { grid-column:span 2; }
+    .t5 { grid-column:span 1; }
+    .quotes { grid-template-columns:1fr; }
+    .quote:nth-child(n) { margin-top:0; }
+    .order .box { padding:2.5rem; gap:2.5rem; }
+  }
+  @media (max-width:760px) {
+    body { padding-bottom:92px; }
+    section { padding:3.5rem 0; }
+    .hero { padding:1.5rem 0 3rem; }
+    .hero::after { display:none; }
+    .hero .wrap, .menu-head, .atelier .wrap, .hours .wrap, .order .box { grid-template-columns:1fr; gap:2rem; }
+    .hero-art { max-width:330px; margin:1.5rem auto 0; justify-self:center; }
+    .stamp { width:108px; height:108px; right:-4px; top:-14px; }
+    .hero-card { left:0; bottom:1.25rem; }
+    .hero .actions .btn { width:100%; }
+    .tiles { grid-template-columns:1fr; }
+    .tile, .t1, .t2, .t3, .t4, .t5, .t6 { grid-column:auto; }
+    .t2, .t6 { flex-direction:column; align-items:stretch; }
+    .t2 .art, .t2 .info { flex:none; }
+    .t6 { align-items:flex-start; }
+    .menu-head { margin-bottom:2rem; }
+    .stat:nth-child(2), .stat:nth-child(4), .js .stat.reveal.in:nth-child(2), .js .stat.reveal.in:nth-child(4) { transform:none; }
+    .stat { padding:1.1rem 1rem; }
+    .order .box { padding:1.75rem 1.25rem; border-radius:24px; }
+    .row2 { grid-template-columns:1fr; }
+    td, th { padding:.9rem .25rem; }
+    td:last-child { font-size:1.2rem; }
+    tr.today th::after { display:block; margin:.15rem 0 0; }
+    /* header + burger */
+    .burger { display:inline-flex; align-items:center; gap:.55rem; min-height:48px; padding:0 1.1rem; border-radius:999px; border:1.5px solid var(--ink); background:transparent; color:var(--ink); font:600 1rem var(--sans); cursor:pointer; }
+    .burger .bars { width:18px; height:12px; position:relative; }
+    .burger .bars::before, .burger .bars::after { content:""; position:absolute; left:0; width:100%; height:2px; background:currentColor; transition:transform .25s, top .25s; }
+    .burger .bars::before { top:1px; } .burger .bars::after { top:9px; }
+    .burger[aria-expanded="true"] .bars::before { top:5px; transform:rotate(45deg); }
+    .burger[aria-expanded="true"] .bars::after { top:5px; transform:rotate(-45deg); }
+    header .wrap { position:relative; }
+    nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:stretch; gap:0; background:var(--paper); padding:.5rem 1.25rem 1.25rem; box-shadow:0 24px 30px -10px #0004; border-bottom:1px solid var(--line); }
+    nav.open { display:flex; }
+    nav a { min-height:52px; padding:0; font-size:1.2rem; font-family:var(--serif); border-bottom:1px solid var(--line); border-radius:0; }
+    nav a.cta { margin:1rem 0 0; justify-content:center; border-radius:999px; border:0; font-family:var(--sans); font-size:1rem; }
+    .sticky-cta { display:flex; align-items:center; justify-content:center; position:fixed; left:12px; right:12px; bottom:12px; z-index:80; min-height:56px; padding:0 1rem; border-radius:16px; background:var(--crust); color:#fff; font-weight:700; font-size:1rem; text-decoration:none; box-shadow:0 12px 30px #0006; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+    .js .reveal { opacity:1; transform:none; }
+    .marquee .track { width:auto; flex-wrap:wrap; justify-content:center; }
+    .marquee ul[aria-hidden="true"] { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="demo">Site de démonstration — l'entreprise est fictive.</div>
+
+<!-- shared SVG art -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="wheat" viewBox="0 0 60 200">
+      <path d="M30 198 L30 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <g fill="currentColor">
+        <ellipse cx="30" cy="16" rx="5.5" ry="14"/>
+        <ellipse cx="19" cy="46" rx="6" ry="14" transform="rotate(-28 19 46)"/><ellipse cx="41" cy="46" rx="6" ry="14" transform="rotate(28 41 46)"/>
+        <ellipse cx="19" cy="76" rx="6" ry="14" transform="rotate(-28 19 76)"/><ellipse cx="41" cy="76" rx="6" ry="14" transform="rotate(28 41 76)"/>
+        <ellipse cx="19" cy="106" rx="6" ry="14" transform="rotate(-28 19 106)"/><ellipse cx="41" cy="106" rx="6" ry="14" transform="rotate(28 41 106)"/>
+        <ellipse cx="20" cy="136" rx="5.5" ry="12" transform="rotate(-28 20 136)"/><ellipse cx="40" cy="136" rx="5.5" ry="12" transform="rotate(28 40 136)"/>
+      </g>
+    </symbol>
+    <symbol id="boule" viewBox="0 0 200 160">
+      <ellipse cx="100" cy="143" rx="86" ry="10" fill="#3b241855"/>
+      <path d="M14 112C14 48 58 14 100 14s86 34 86 98c0 22-34 32-86 32S14 134 14 112Z" fill="#b87333"/>
+      <path d="M14 112C14 48 58 14 100 14s86 34 86 98c0 22-34 32-86 32S14 134 14 112Z" fill="url(#crustShade)"/>
+      <path d="M30 98C36 56 66 30 100 30s64 26 70 68" fill="none" stroke="#e9bd7d" stroke-width="7" stroke-linecap="round" opacity=".65"/>
+      <g fill="none" stroke="#f7e6c4" stroke-width="9" stroke-linecap="round">
+        <path d="M62 50c14 20 30 46 48 74"/><path d="M92 36c12 20 28 42 50 64"/><path d="M40 70c10 16 22 34 38 56" opacity=".8"/>
+      </g>
+      <g fill="#fff6e4" opacity=".85"><circle cx="58" cy="44" r="2"/><circle cx="130" cy="48" r="2.4"/><circle cx="154" cy="82" r="2"/><circle cx="46" cy="96" r="1.8"/><circle cx="118" cy="30" r="1.8"/><circle cx="84" cy="112" r="1.6"/></g>
+    </symbol>
+    <radialGradient id="crustShade" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#e6a85c" stop-opacity=".9"/><stop offset=".6" stop-color="#b87333" stop-opacity="0"/><stop offset="1" stop-color="#5a2f0e" stop-opacity=".55"/></radialGradient>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#haut" aria-label="Atelier Fournil, accueil"><svg aria-hidden="true" viewBox="0 0 60 200"><use href="#wheat"/></svg>Atelier <i>Fournil</i></a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav"><span class="bars" aria-hidden="true"></span><span class="lbl">Menu</span></button>
+    <nav id="nav" aria-label="Navigation principale">
+      <a href="#carte">La carte</a>
+      <a href="#atelier">L'atelier</a>
+      <a href="#horaires">Horaires</a>
+      <a href="#avis">Avis</a>
+      <a href="#commander" class="cta">Commander</a>
+    </nav>
+  </div>
+</header>
+
+<main id="haut">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="tag">Boulangerie artisanale · Lyon 2e</p>
+        <h1>Le pain, <em>lentement.</em></h1>
+        <p class="lead">Levain naturel, farines de la Drôme et beurre AOP. Cuit chaque matin à 5 h, encore tiède quand vous poussez la porte.</p>
+        <div class="actions">
+          <a class="btn" href="#commander">Commander pour demain</a>
+          <a class="btn ghost" href="#carte">Voir la carte</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="arch">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+            <circle cx="200" cy="200" r="118" fill="#f8e3b5" opacity=".75"/>
+            <circle cx="200" cy="200" r="84" fill="#fbeecb" opacity=".8"/>
+            <use href="#wheat" x="38" y="120" width="66" height="220" style="color:#7a4a1c" transform="rotate(-14 71 230)"/>
+            <use href="#wheat" x="300" y="100" width="66" height="220" style="color:#7a4a1c" transform="rotate(16 333 210)"/>
+            <use href="#wheat" x="96" y="60" width="50" height="170" style="color:#9a6a2e" transform="rotate(-4 121 145)"/>
+            <use href="#boule" x="46" y="236" width="308" height="246"/>
+          </svg>
+        </div>
+        <svg class="stamp" viewBox="0 0 140 140">
+          <defs><path id="circ" d="M70 70 m-52 0 a52 52 0 1 1 104 0 a52 52 0 1 1 -104 0"/></defs>
+          <circle cx="70" cy="70" r="68" fill="#9a4214"/>
+          <circle cx="70" cy="70" r="40" fill="none" stroke="#f3ebdd" stroke-opacity=".35"/>
+          <text font-size="14" font-weight="600" fill="#f3ebdd" font-family="Inter, system-ui, sans-serif"><textPath href="#circ" textLength="318" lengthAdjust="spacing">LEVAIN · 24 H · LYON · FAIT MAISON ·</textPath></text>
+          <use href="#wheat" x="52" y="34" width="36" height="72" style="color:#f3ebdd"/>
+        </svg>
+        <div class="hero-card"><b>Sortie du four</b><span>6 h 30 · 11 h · 16 h</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Nos engagements">
+    <div class="track">
+      <ul>
+        <li>Levain de 24 h</li><li>Beurre AOP Charentes-Poitou</li><li>Farines de la Drôme</li><li>Cuit à 5 h chaque matin</li><li>Jamais de congélation</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Levain de 24 h</li><li>Beurre AOP Charentes-Poitou</li><li>Farines de la Drôme</li><li>Cuit à 5 h chaque matin</li><li>Jamais de congélation</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="carte">
+    <div class="wrap">
+      <div class="menu-head reveal">
+        <div>
+          <p class="tag">La carte du jour</p>
+          <h2>Ce qui sort <em>du four</em>.</h2>
+        </div>
+        <p class="section-lead">Chaque pièce est façonnée à la main dans notre fournil, avec des ingrédients de saison. Quand c'est vendu, c'est vendu.</p>
+      </div>
+      <div class="tiles">
+        <article class="tile t1 reveal">
+          <div class="art" aria-hidden="true"><svg viewBox="0 0 200 160"><use href="#boule" width="200" height="160"/></svg></div>
+          <h3>Pain au levain</h3>
+          <p>Fermenté 24 heures, croûte craquante, mie alvéolée et légèrement acidulée.</p>
+          <span class="price">dès 4,20 €</span>
+        </article>
+        <article class="tile t2 reveal">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 220 120">
+              <defs><linearGradient id="bag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0c27a"/><stop offset="1" stop-color="#a8651f"/></linearGradient></defs>
+              <g transform="rotate(-14 110 60)">
+                <rect x="6" y="40" width="208" height="40" rx="20" fill="url(#bag)"/>
+                <g fill="#fbe7bf"><ellipse cx="40" cy="56" rx="14" ry="3.6" transform="rotate(-24 40 56)"/><ellipse cx="78" cy="56" rx="14" ry="3.6" transform="rotate(-24 78 56)"/><ellipse cx="116" cy="56" rx="14" ry="3.6" transform="rotate(-24 116 56)"/><ellipse cx="154" cy="56" rx="14" ry="3.6" transform="rotate(-24 154 56)"/><ellipse cx="190" cy="57" rx="11" ry="3.2" transform="rotate(-24 190 57)"/></g>
+              </g>
+            </svg>
+          </div>
+          <div class="info">
+            <h3>Baguette tradition</h3>
+            <p>Pétrie à l'ancienne, longue pousse au froid. À rompre, pas à couper.</p>
+            <span class="price">1,30 €</span>
+          </div>
+        </article>
+        <article class="tile t3 reveal">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 200 120">
+              <g fill="#d9953f" stroke="#8a4f17" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M14 92C8 78 20 64 36 70l18 16c-8 14-26 16-40 6Z"/>
+                <path d="M186 92c6-14-6-28-22-22l-18 16c8 14 26 16 40 6Z"/>
+                <path d="M36 70c6-22 26-36 42-38l-6 56c-18 2-32-6-36-18Z"/>
+                <path d="M164 70c-6-22-26-36-42-38l6 56c18 2 32-6 36-18Z"/>
+                <path d="M72 32c18-10 38-10 56 0l6 58c-24 10-44 10-68 0Z"/>
+              </g>
+              <g fill="none" stroke="#f3c27b" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M86 42c8-4 20-4 28 0"/><path d="M52 52c4-6 10-10 16-12"/><path d="M148 52c-4-6-10-10-16-12"/></g>
+            </svg>
+          </div>
+          <h3>Croissant pur beurre</h3>
+          <p>Feuilletage de 27 couches, doré et fondant. Le favori du matin.</p>
+          <span class="price">1,40 €</span>
+        </article>
+        <article class="tile t4 reveal">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 200 150">
+              <circle cx="100" cy="78" r="64" fill="#d99a3c"/>
+              <circle cx="100" cy="78" r="64" fill="none" stroke="#8a5516" stroke-width="5" stroke-dasharray="7 6"/>
+              <circle cx="100" cy="78" r="52" fill="#f7d44a"/>
+              <g fill="#fff8e3"><circle cx="100" cy="78" r="15"/><circle cx="72" cy="62" r="11"/><circle cx="128" cy="62" r="11"/><circle cx="68" cy="98" r="11"/><circle cx="132" cy="98" r="11"/><circle cx="100" cy="46" r="10"/><circle cx="100" cy="110" r="10"/></g>
+              <path d="M96 60c4-6 10-6 12 0" fill="none" stroke="#6b8f3a" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Tarte au citron</h3>
+          <p>Crème acidulée de citrons de Menton, meringue légèrement brûlée.</p>
+          <span class="price">4,20 € la part</span>
+        </article>
+        <article class="tile t5 reveal">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 200 110">
+              <rect x="16" y="40" width="168" height="48" rx="24" fill="#d9a05b"/>
+              <path d="M16 62c0-14 10-24 26-24h116c16 0 26 10 26 24 0 6-6 8-14 6-10-3-14 6-26 4-12-2-14-10-26-8-12 2-16 12-28 10s-14-6-26-4-22 4-30-2c-4-3-4-4-4-6Z" fill="#3a2218"/>
+              <g fill="#e3a65b"><circle cx="60" cy="52" r="2.5"/><circle cx="112" cy="48" r="2.5"/><circle cx="150" cy="54" r="2.5"/></g>
+              <path d="M30 80h140" stroke="#fff3d9" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+            </svg>
+          </div>
+          <h3>Éclair chocolat</h3>
+          <p>Pâte à choux craquante, crème pâtissière au chocolat noir 70 %.</p>
+          <span class="price">3,80 €</span>
+        </article>
+        <article class="tile t6 reveal">
+          <div class="info">
+            <h3>Formule midi</h3>
+            <p>Sandwich sur pain du jour, boisson et dessert maison. Prêt en deux minutes, emballé pour emporter.</p>
+          </div>
+          <div class="big">8,90 €</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 13C50 4 90 22 150 12s100-8 160 1 100 8 160-2 110-8 170 2 100 9 160-1 100-7 160 1 100 8 180-1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+
+  <section id="atelier" class="atelier">
+    <svg class="wheat-deco" aria-hidden="true" viewBox="0 0 60 200"><use href="#wheat"/></svg>
+    <div class="wrap">
+      <div class="copy reveal">
+        <p class="tag">L'atelier</p>
+        <h2>Trois boulangers, une nuit, <em>tout le temps</em> du monde.</h2>
+        <p>Depuis 2014, l'équipe se lève quand le quartier dort. Pas de congélation, pas de raccourci : un levain nourri chaque jour, des pâtes qui reposent, et un four qui chauffe avant l'aube.</p>
+        <p>On préfère faire moins, mais le faire bien. C'est pour ça que le pain a ce goût-là.</p>
+        <ol class="steps">
+          <li><b>01</b> Pétrir doucement, à la main ou presque</li>
+          <li><b>02</b> Laisser pousser 24 heures au frais</li>
+          <li><b>03</b> Façonner chaque pièce une à une</li>
+          <li><b>04</b> Cuire sur sole, jusqu'à la belle couleur</li>
+        </ol>
+      </div>
+      <div class="stats">
+        <div class="stat reveal"><div class="n"><span class="num" data-count="10">10</span><small>ans</small></div><p>de savoir-faire au service du quartier</p></div>
+        <div class="stat reveal"><div class="n"><span class="num" data-count="24">24</span><small>h</small></div><p>de fermentation pour chaque pain au levain</p></div>
+        <div class="stat reveal"><div class="n"><span class="num" data-count="3">3</span><small>mains</small></div><p>trois boulangers, une seule exigence</p></div>
+        <div class="stat reveal"><div class="n"><span class="num" data-count="100">100</span><small>%</small></div><p>fait maison, rien de surgelé</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="horaires" class="hours">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="tag">Horaires &amp; adresse</p>
+        <h2>Venez nous <em>voir</em>.</h2>
+        <p class="status" id="status" role="status"><span class="dot" aria-hidden="true"></span><span id="status-text">Consultez nos horaires ci-contre</span></p>
+        <address>12 rue des Farines, 69002 Lyon<br><a href="tel:+33400000000">04 00 00 00 00</a></address>
+      </div>
+      <div class="reveal">
+        <table>
+          <caption class="sr">Horaires d'ouverture</caption>
+          <tbody>
+            <tr data-days="1,2,3,4,5"><th scope="row">Lundi – vendredi</th><td>6 h 30 – 19 h 30</td></tr>
+            <tr data-days="6"><th scope="row">Samedi</th><td>7 h – 19 h</td></tr>
+            <tr data-days="0"><th scope="row">Dimanche</th><td>7 h – 13 h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="avis" class="reviews">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="tag">Ils en parlent</p>
+        <h2>Le pain du quartier, <em>racontez-nous</em>.</h2>
+      </div>
+      <div class="quotes">
+        <figure class="quote reveal">
+          <blockquote>Le meilleur pain que j'aie goûté à Lyon. La croûte craque, la mie sent le blé. Je ne reviens plus qu'ici.</blockquote>
+          <div class="stars" role="img" aria-label="5 étoiles sur 5">★★★★★</div>
+          <figcaption class="who">Camille, cliente depuis 2019</figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <blockquote>Des croissants qui font des miettes partout, exactement comme il faut. Et un accueil toujours souriant.</blockquote>
+          <div class="stars" role="img" aria-label="5 étoiles sur 5">★★★★★</div>
+          <figcaption class="who">Hugo, voisin de la rue Mercière</figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <blockquote>Je commande la veille, tout est prêt à 8 h. La tarte au citron a fait l'unanimité à l'anniversaire de ma mère.</blockquote>
+          <div class="stars" role="img" aria-label="5 étoiles sur 5">★★★★★</div>
+          <figcaption class="who">Inès, Lyon 2e</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="commander" class="order">
+    <div class="wrap">
+      <div class="box reveal">
+        <div class="copy">
+          <p class="tag">Commander</p>
+          <h2>Votre pain, <em>réservé</em> pour demain.</h2>
+          <p>Dites-nous ce qu'il vous faut et quand passer. On prépare tout et on vous le garde jusqu'à la fin du créneau.</p>
+        </div>
+        <div>
+          <form id="order-form" novalidate>
+            <div class="row2">
+              <div class="field">
+                <label for="f-name">Prénom</label>
+                <input id="f-name" name="name" type="text" autocomplete="given-name" placeholder="Camille" required aria-describedby="e-name">
+                <p class="err" id="e-name" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-phone">Téléphone</label>
+                <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06 00 00 00 00" required aria-describedby="e-phone">
+                <p class="err" id="e-phone" hidden></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-email">E-mail <small>(facultatif, pour la confirmation)</small></label>
+              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="camille@exemple.fr" aria-describedby="e-email">
+              <p class="err" id="e-email" hidden></p>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="f-date">Jour de retrait</label>
+                <input id="f-date" name="date" type="date" autocomplete="off" required aria-describedby="e-date">
+                <p class="err" id="e-date" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-slot">Créneau</label>
+                <select id="f-slot" name="slot" required>
+                  <option value="6 h 30 – 9 h">6 h 30 – 9 h</option>
+                  <option value="9 h – 12 h">9 h – 12 h</option>
+                  <option value="12 h – 14 h">12 h – 14 h</option>
+                  <option value="16 h – 19 h">16 h – 19 h</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-items">Votre commande</label>
+              <textarea id="f-items" name="items" rows="4" placeholder="Ex. 2 pains au levain, 4 croissants" required aria-describedby="e-items"></textarea>
+              <p class="err" id="e-items" hidden></p>
+              <div class="chips" id="chips" hidden>
+                <button type="button" class="chip" data-add="1 pain au levain">+ Pain au levain</button>
+                <button type="button" class="chip" data-add="2 baguettes tradition">+ Baguettes</button>
+                <button type="button" class="chip" data-add="4 croissants">+ Croissants</button>
+                <button type="button" class="chip" data-add="1 tarte au citron">+ Tarte citron</button>
+              </div>
+            </div>
+            <button class="btn" type="submit">Envoyer ma commande</button>
+          </form>
+          <div class="done" id="done" role="status" tabindex="-1" hidden>
+            <h3 id="done-title">Merci !</h3>
+            <p id="done-text"></p>
+            <button class="btn" type="button" id="again">Nouvelle commande</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="big">Atelier Fournil</span>
+    12 rue des Farines, 69002 Lyon<br>
+    © Atelier Fournil — site de démonstration, entreprise fictive.
+  </div>
+</footer>
+
+<a class="sticky-cta" href="#commander">Commander pour demain</a>
+
+<script>
+(() => {
+  const doc = document.documentElement;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* burger */
+  const burger = document.getElementById("burger"), nav = document.getElementById("nav");
+  const lbl = burger.querySelector(".lbl");
+  const setNav = (open) => { nav.classList.toggle("open", open); burger.setAttribute("aria-expanded", String(open)); lbl.textContent = open ? "Fermer" : "Menu"; };
+  burger.addEventListener("click", () => setNav(!nav.classList.contains("open")));
+  nav.addEventListener("click", (e) => { if (e.target.closest("a")) setNav(false); });
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && nav.classList.contains("open")) { setNav(false); burger.focus(); } });
+
+  /* reveal + counters (JS only, content visible without JS) */
+  const counters = document.querySelectorAll(".num[data-count]");
+  if ("IntersectionObserver" in window && !reduce) {
+    doc.classList.add("js");
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+    }), { threshold: 0.12 });
+    els.forEach((el, i) => { el.style.transitionDelay = (i % 3) * 90 + "ms"; io.observe(el); });
+
+    const cio = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      cio.unobserve(en.target);
+      const el = en.target, to = +el.dataset.count, t0 = performance.now(), dur = 1400;
+      const tick = (t) => {
+        const p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * e);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      el.textContent = "0";
+      requestAnimationFrame(tick);
+    }), { threshold: 0.6 });
+    counters.forEach((c) => cio.observe(c));
+  }
+
+  /* live open / closed badge (Europe/Paris) */
+  const HOURS = { 0:[7,13], 1:[6.5,19.5], 2:[6.5,19.5], 3:[6.5,19.5], 4:[6.5,19.5], 5:[6.5,19.5], 6:[7,19] };
+  const DAYS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+  const fmt = (h) => { const hh = Math.floor(h), mm = Math.round((h - hh) * 60); return mm ? hh + " h " + String(mm).padStart(2, "0") : hh + " h"; };
+  function updateStatus() {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Paris", weekday: "short", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
+    const get = (t) => parts.find((p) => p.type === t).value;
+    const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(get("weekday"));
+    const now = (+get("hour")) + (+get("minute")) / 60;
+    const box = document.getElementById("status"), txt = document.getElementById("status-text");
+    const [o, c] = HOURS[day];
+    if (now >= o && now < c) {
+      box.className = "status open"; txt.textContent = "Ouvert maintenant · jusqu'à " + fmt(c);
+    } else {
+      let when;
+      if (now < o) when = "aujourd'hui à " + fmt(o);
+      else { const nd = (day + 1) % 7; when = "demain à " + fmt(HOURS[nd][0]); }
+      box.className = "status closed"; txt.textContent = "Fermé · ouvre " + when;
+    }
+    document.querySelectorAll("tr[data-days]").forEach((tr) => tr.classList.toggle("today", tr.dataset.days.split(",").includes(String(day))));
+  }
+  updateStatus(); setInterval(updateStatus, 60000);
+
+  /* order form */
+  const form = document.getElementById("order-form"), done = document.getElementById("done");
+  const f = { name: form.name, phone: form.phone, email: form.email, date: form.date, items: form.items };
+  const pad = (n) => String(n).padStart(2, "0");
+  const t = new Date(); t.setDate(t.getDate() + 1);
+  const tomorrow = t.getFullYear() + "-" + pad(t.getMonth() + 1) + "-" + pad(t.getDate());
+  f.date.min = tomorrow; f.date.value = tomorrow;
+
+  const chips = document.getElementById("chips"); chips.hidden = false;
+  chips.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-add]"); if (!b) return;
+    const v = f.items.value.trim();
+    f.items.value = (v ? v + "\n" : "") + b.dataset.add;
+    f.items.dispatchEvent(new Event("input"));
+  });
+
+  const setErr = (key, msg) => {
+    const el = f[key], p = document.getElementById("e-" + key);
+    if (msg) { p.textContent = msg; p.hidden = false; el.setAttribute("aria-invalid", "true"); }
+    else { p.hidden = true; el.removeAttribute("aria-invalid"); }
+    return !msg;
+  };
+  const rules = {
+    name: (v) => v.trim().length < 2 ? "Dites-nous votre prénom, qu'on sache qui appeler." : "",
+    phone: (v) => /^(?:\+33|0033|0)\s?[1-9](?:[\s.\-]?\d{2}){4}$/.test(v.trim()) ? "" : "Ce numéro semble incomplet. Exemple : 06 12 34 56 78.",
+    email: (v) => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "" : "Cette adresse e-mail ne semble pas valide.",
+    date: (v) => !v ? "Choisissez un jour de retrait." : v < tomorrow ? "Nous préparons les commandes à partir de demain." : "",
+    items: (v) => v.trim().length < 3 ? "Indiquez au moins un produit, par exemple « 2 baguettes »." : ""
+  };
+  Object.keys(rules).forEach((k) => f[k].addEventListener("input", () => { if (f[k].getAttribute("aria-invalid")) setErr(k, rules[k](f[k].value)); }));
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let first = null;
+    Object.keys(rules).forEach((k) => { if (!setErr(k, rules[k](f[k].value)) && !first) first = f[k]; });
+    if (first) { first.focus(); return; }
+    const d = new Date(f.date.value + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+    document.getElementById("done-title").textContent = "Merci " + f.name.value.trim() + " !";
+    document.getElementById("done-text").textContent = "Votre commande est bien notée pour " + d + ", entre " + form.slot.value + ". Nous vous la gardons au chaud, à très vite rue des Farines. (Démonstration : rien n'a été envoyé.)";
+    form.hidden = true; done.hidden = false; done.focus();
+  });
+  document.getElementById("again").addEventListener("click", () => {
+    form.reset(); f.date.value = tomorrow; form.hidden = false; done.hidden = true; f.name.focus();
+  });
+})();
+</script>
+</body>
+</html>

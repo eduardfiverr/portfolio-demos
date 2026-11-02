@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen Dental — Gentle dentistry in Manchester</title>
+<meta name="description" content="Lumen Dental, Manchester: gentle check-ups, whitening, Invisalign and implants with prices in writing before we start. New patients welcome, same-week appointments.">
+<meta name="theme-color" content="#e4f4f4">
+<script>document.documentElement.className += ' js';</script>
+<style>
+  :root{
+    --ink:#0f2a30; --muted:#4a666d; --teal:#0b7c88; --deep:#06505a; --mint:#e4f4f4; --mint2:#cfe9ea; --sand:#fbf5ec; --coral:#b8452f; --gold:#f0b429;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --ease:cubic-bezier(.4,.1,.2,1);
+  }
+  *{box-sizing:border-box;margin:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:84px}
+  body{font-family:var(--sans);background:#fff;color:var(--ink);line-height:1.65;font-size:17px;overflow-x:hidden}
+  img,svg{max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .num{font-variant-numeric:tabular-nums}
+
+  .demo{background:#fff3c4;color:#5c4400;text-align:center;font-size:14px;line-height:1.4;padding:10px 16px;font-weight:600}
+
+  /* header */
+  header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(15,42,48,.09)}
+  .bar{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:12px;flex-wrap:wrap}
+  .logo{font-weight:800;font-size:1.3rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:44px;letter-spacing:-.01em}
+  .logo svg{width:30px;height:30px}
+  .logo b{color:var(--teal)}
+  nav ul{list-style:none;padding:0;display:flex;gap:2px;align-items:center}
+  nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;font-size:15px;font-weight:500;color:var(--muted);border-radius:999px;transition:background .25s,color .25s}
+  nav a:hover{background:var(--mint);color:var(--deep)}
+  nav a.nav-cta{background:var(--teal);color:#fff;margin-left:6px}
+  nav a.nav-cta:hover{background:var(--deep)}
+  #burger{display:none;width:48px;height:48px;border:1px solid rgba(15,42,48,.25);background:#fff;border-radius:50%;cursor:pointer;align-items:center;justify-content:center;color:var(--ink)}
+  #burger span{display:block;width:20px;height:2px;background:currentColor;position:relative;border-radius:2px}
+  #burger span::before,#burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s var(--ease)}
+  #burger span::before{top:-6px}#burger span::after{top:6px}
+  #burger[aria-expanded="true"] span{background:transparent}
+  #burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+  #burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:var(--teal);color:#fff;text-decoration:none;font:600 16px/1 var(--sans);border:0;cursor:pointer;transition:background .25s,transform .25s var(--ease)}
+  .btn:hover{background:var(--deep);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+  .btn.light{background:#fff;color:var(--deep)}
+  .btn.light:hover{background:var(--mint)}
+  .btn.small{min-height:44px;padding:0 20px;font-size:15px}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+  /* type */
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;color:var(--ink)}
+  h1{font-size:clamp(2.6rem,6.4vw,4.9rem);letter-spacing:-.02em}
+  h1 em,h2 em{font-style:italic;color:var(--coral);font-weight:500}
+  h2{font-size:clamp(2.05rem,4.4vw,3.2rem);margin-bottom:14px;letter-spacing:-.01em}
+  h3{font-size:1.45rem;margin-bottom:6px}
+  .eyebrow{display:block;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);font-weight:700;margin-bottom:14px}
+  .lead{color:var(--muted);max-width:36rem;font-size:1.1rem}
+  section{position:relative;padding:96px 0}
+  .head{margin-bottom:44px}
+  .center{text-align:center}.center .lead{margin:0 auto}
+  .js-only{display:none}.js .js-only{display:block}
+  .nojs-note{background:var(--mint);border-radius:16px;padding:16px 20px;color:var(--deep)}
+  .js .nojs-note{display:none}
+
+  /* hero */
+  .hero{padding:48px 0 88px;overflow:hidden;background:linear-gradient(165deg,var(--mint) 0%,#fff 62%)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(11,124,136,.3);color:var(--deep);border-radius:999px;padding:6px 16px;font-size:14px;font-weight:600}
+  .badge i{width:9px;height:9px;border-radius:50%;background:#1f9d62;box-shadow:0 0 0 4px rgba(31,157,98,.18)}
+  .hero h1{margin:20px 0 18px}
+  .hero p.lead{font-size:1.2rem;margin-bottom:28px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .rating{font-size:15px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .stars{color:#a86d00;letter-spacing:.08em}
+  .facts{display:grid;grid-template-columns:repeat(4,auto);gap:12px 32px;margin-top:38px;justify-content:start;color:var(--muted);font-size:15px;line-height:1.35}
+  .facts b{display:block;font-family:var(--serif);font-size:2rem;color:var(--ink);font-weight:600;line-height:1.1}
+  .visual{position:relative;max-width:460px;margin:0 auto;width:100%}
+  .visual svg.art{width:100%;height:auto;display:block;overflow:visible}
+  .float{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 16px 40px rgba(15,42,48,.14);font-size:14px;line-height:1.35;animation:bob 6s ease-in-out infinite}
+  .float b{display:block;font-size:15px}
+  .float.f1{left:-4px;top:14%}
+  .float.f2{right:-4px;bottom:12%;animation-delay:-3s}
+  @keyframes bob{50%{transform:translateY(-8px)}}
+  .spark{transform-box:fill-box;transform-origin:center;animation:twinkle 3.2s ease-in-out infinite}
+  .spark.s2{animation-delay:-1s}.spark.s3{animation-delay:-2s}
+  @keyframes twinkle{0%,100%{transform:scale(.4);opacity:.35}50%{transform:scale(1);opacity:1}}
+
+  /* trust strip */
+  .strip{background:var(--deep);color:#e4f4f4;padding:22px 0}
+  .strip ul{list-style:none;padding:0;display:flex;gap:10px 36px;justify-content:center;flex-wrap:wrap;font-size:15px;font-weight:500}
+  .strip li{display:flex;align-items:center;gap:10px;min-height:32px}
+  .strip svg{width:20px;height:20px;flex:none}
+
+  /* services */
+  .chips{display:none;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+  .js .chips{display:flex}
+  .chips button{min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid rgba(15,42,48,.25);background:#fff;font:600 15px/1 var(--sans);color:var(--ink);cursor:pointer;transition:background .25s,color .25s}
+  .chips button:hover{background:var(--mint)}
+  .chips button[aria-pressed="true"]{background:var(--deep);border-color:var(--deep);color:#fff}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:#fff;border:1px solid rgba(15,42,48,.12);border-radius:26px;padding:26px 24px 24px;display:flex;flex-direction:column;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .3s}
+  .svc:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(11,124,136,.16);border-color:rgba(11,124,136,.4)}
+  .svc .ico{width:64px;height:64px;background:var(--mint);border-radius:20px;padding:8px;margin-bottom:18px}
+  .svc .cat{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--deep);margin-bottom:6px}
+  .svc p{color:var(--muted);font-size:16px;flex:1}
+  .svc .from{margin-top:16px;padding-top:14px;border-top:1px dashed rgba(15,42,48,.2);font-weight:700;color:var(--deep);display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .svc .from span{font-weight:500;color:var(--muted);font-size:14px}
+  .count{color:var(--muted);font-size:15px;margin-top:18px;min-height:1.6em}
+
+  /* calculator */
+  .calc-sec{background:var(--sand)}
+  .calc{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:start}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .opt{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid rgba(15,42,48,.14);border-radius:18px;padding:12px 16px;min-height:68px;cursor:pointer;transition:border-color .25s,background .25s}
+  .opt:hover{border-color:var(--teal)}
+  .opt:has(input:checked){border-color:var(--teal);background:#f3fbfb}
+  .opt input{width:24px;height:24px;accent-color:var(--teal);flex:none;min-height:0}
+  .opt .t{flex:1;line-height:1.3;font-weight:600;font-size:16px}
+  .opt .t small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+  .opt .p{font-weight:700;color:var(--deep)}
+  .opt.qty{cursor:default}
+  .stepper{display:flex;align-items:center;gap:4px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(15,42,48,.3);background:#fff;font:600 22px/1 var(--sans);cursor:pointer;color:var(--ink)}
+  .stepper button:hover{background:var(--mint)}
+  .stepper output{min-width:26px;text-align:center;font-weight:700}
+  .summary{background:var(--deep);color:#e4f4f4;border-radius:30px;padding:30px 28px;position:sticky;top:96px}
+  .summary h3{color:#fff;font-size:1.6rem}
+  .summary dl{display:grid;grid-template-columns:1fr auto;gap:8px 12px;margin:18px 0;font-size:16px}
+  .summary dd{text-align:right;font-weight:600}
+  .summary .total{border-top:1px solid rgba(255,255,255,.25);padding-top:14px;margin-top:6px;font-size:1rem;grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline}
+  .summary .total b{font-family:var(--serif);font-size:2.8rem;line-height:1;color:#fff}
+  .club{display:flex;align-items:center;gap:12px;min-height:48px;cursor:pointer;font-size:15px;line-height:1.35}
+  .club input{width:24px;height:24px;accent-color:#7fd8e0;flex:none;min-height:0}
+  .summary label.sel{display:block;font-size:15px;margin-top:14px;font-weight:600}
+  .summary select{margin-top:6px;border-radius:14px}
+  .monthly{margin-top:14px;background:rgba(255,255,255,.1);border-radius:16px;padding:14px 16px;font-size:15px;min-height:58px}
+  .monthly b{font-size:1.25rem;color:#fff}
+  .summary .btn{width:100%;margin-top:18px}
+  .fine-note{font-size:13px;color:#cfe6e8;margin-top:12px;line-height:1.5}
+
+  /* before/after */
+  .ba-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .ba{--pos:50%;position:relative;border-radius:30px;overflow:hidden;aspect-ratio:5/3;box-shadow:0 24px 60px rgba(15,42,48,.18);background:#f0cfc4;user-select:none;touch-action:pan-y}
+  .ba-pane{position:absolute;inset:0}
+  .ba-pane svg{width:100%;height:100%;display:block}
+  .ba-pane.before{color:#d6c083}
+  .ba-pane.after{color:#fefefe;clip-path:inset(0 0 0 var(--pos))}
+  .ba .tag{position:absolute;top:14px;padding:6px 14px;border-radius:999px;background:rgba(15,42,48,.82);color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .before .tag{left:14px}.after .tag{right:14px;background:var(--teal)}
+  .ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.3);pointer-events:none}
+  .ba-handle::after{content:"\2194";position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--deep);font-size:22px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.28)}
+  .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;background:transparent;margin:0}
+  .ba input::-webkit-slider-thumb{-webkit-appearance:none;width:56px;height:600px}
+  .ba input::-moz-range-thumb{width:56px;height:600px;border:0;background:transparent}
+  .ba:focus-within{outline:3px solid var(--coral);outline-offset:4px}
+  .ba .ctl{display:none}
+  .ba-note{font-size:14px;color:var(--muted);margin-top:14px}
+  .check-list{list-style:none;padding:0;display:grid;gap:12px;margin:26px 0 30px}
+  .check-list li{padding-left:32px;position:relative}
+  .check-list li::before{content:"";position:absolute;left:2px;top:.5em;width:15px;height:8px;border-left:3px solid var(--teal);border-bottom:3px solid var(--teal);transform:rotate(-45deg)}
+
+  /* team */
+  .team-sec{background:var(--mint)}
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .doc{text-align:center}
+  .doc svg{width:100%;max-width:270px;height:auto;margin:0 auto 20px;display:block}
+  .doc .role{color:var(--deep);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:10px}
+  .doc p{color:var(--muted);max-width:22rem;margin:0 auto;font-size:16px}
+
+  /* first visit */
+  .steps{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s;position:relative}
+  .steps::before{content:"";position:absolute;left:6%;right:6%;top:30px;border-top:2px dashed rgba(11,124,136,.4)}
+  .steps li{position:relative;text-align:center;padding:0 6px}
+  .steps .n{width:60px;height:60px;border-radius:50%;background:var(--teal);color:#fff;font-family:var(--serif);font-size:1.8rem;font-weight:600;display:grid;place-items:center;margin:0 auto 18px;position:relative;box-shadow:0 0 0 8px #fff}
+  .steps h3{font-size:1.3rem}
+  .steps p{color:var(--muted);font-size:16px}
+  .steps .min{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);background:var(--mint);border-radius:999px;padding:4px 12px}
+
+  /* tech */
+  .tech-sec{background:var(--ink);color:#e4eef0}
+  .tech-sec h2{color:#fff}.tech-sec .eyebrow{color:#7fd8e0}.tech-sec .lead{color:#b9cfd3}
+  .tech{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .tile{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:26px 22px}
+  .tile svg{width:52px;height:52px;margin-bottom:16px}
+  .tile h3{color:#fff;font-size:1.3rem}
+  .tile p{color:#b9cfd3;font-size:16px}
+
+  /* reviews */
+  .voices{background:var(--sand);overflow:hidden}
+  .voices-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  .arrows{display:none;gap:10px;align-items:center}
+  .js .arrows{display:flex}
+  .arrows button{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:#fff;font-size:22px;cursor:pointer;color:var(--ink);transition:background .25s,color .25s}
+  .arrows button:hover:not(:disabled){background:var(--ink);color:#fff}
+  .arrows button:disabled{opacity:.35;cursor:default}
+  .arrows output{min-width:54px;text-align:center;font-weight:600;color:var(--muted);font-size:15px}
+  .track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 26px;scrollbar-width:thin;scroll-behavior:smooth}
+  .quote{flex:0 0 min(420px,86%);scroll-snap-align:start;background:#fff;border-radius:28px;padding:30px 28px;box-shadow:0 12px 36px rgba(15,42,48,.08);display:flex;flex-direction:column}
+  .quote p{font-family:var(--serif);font-size:1.4rem;line-height:1.38;flex:1}
+  .quote footer{margin-top:22px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
+  .quote footer i{width:46px;height:46px;border-radius:50%;background:var(--mint2);color:var(--deep);display:grid;place-items:center;font-style:normal;font-weight:700}
+  .quote footer b{display:block;color:var(--ink)}
+  .quote .stars{margin-bottom:12px}
+
+  /* finance */
+  .fin{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .fcard{background:#fff;border:1px solid rgba(15,42,48,.12);border-radius:28px;padding:32px 28px;display:flex;flex-direction:column}
+  .fcard.feat{background:var(--deep);color:#e4f4f4;border-color:var(--deep);transform:translateY(-10px)}
+  .fcard.feat h3{color:#fff}
+  .fcard .big{font-family:var(--serif);font-size:3.2rem;line-height:1;font-weight:600;margin:12px 0 4px}
+  .fcard .big small{font-size:1rem;font-family:var(--sans);font-weight:500}
+  .fcard ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px;font-size:16px}
+  .fcard li{padding-left:26px;position:relative}
+  .fcard li::before{content:"";position:absolute;left:0;top:.55em;width:13px;height:7px;border-left:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(-45deg)}
+  .fcard.feat li::before{border-color:#7fd8e0}
+  .fcard .tagc{align-self:flex-start;background:var(--gold);color:var(--ink);font-size:13px;font-weight:700;border-radius:999px;padding:4px 14px;margin-bottom:10px}
+  .fcard p.sub{color:var(--muted)}
+  .fcard.feat p.sub{color:#cfe6e8}
+
+  /* faq */
+  .faq{max-width:780px;margin:0 auto}
+  details{border-bottom:1px solid rgba(15,42,48,.15)}
+  summary{list-style:none;cursor:pointer;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--serif);font-size:1.4rem;font-weight:600;padding:10px 0}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--sans);font-size:1.7rem;color:var(--coral);transition:transform .35s var(--ease);flex:none}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);padding:0 0 22px;max-width:42rem}
+
+  /* booking */
+  .book{background:linear-gradient(180deg,var(--mint),#fff)}
+  .book-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:start}
+  .book .points{list-style:none;padding:0;margin-top:26px;display:grid;gap:14px}
+  .book .points li{display:flex;gap:14px;align-items:flex-start}
+  .book .points svg{width:28px;height:28px;flex:none;margin-top:2px}
+  .formbox{background:#fff;border-radius:34px;padding:34px 30px;box-shadow:0 26px 70px rgba(15,42,48,.14)}
+  .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .formgrid .full{grid-column:1/-1}
+  .field{display:flex;flex-direction:column;gap:6px;border:0;padding:0;min-width:0}
+  label,legend{font-size:15px;font-weight:600;padding:0}
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{font:400 16px/1.4 var(--sans);color:var(--ink);background:#fff;border:1.5px solid rgba(15,42,48,.3);border-radius:14px;padding:12px 16px;min-height:50px;width:100%}
+  textarea{min-height:96px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:3px solid var(--coral);outline-offset:1px;border-color:var(--coral)}
+  [aria-invalid="true"]{border-color:#a3261b!important;background:#fff6f4}
+  .err{color:#a3261b;font-size:14px;font-weight:500}
+  .err:empty{display:none}
+  .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  .pill{position:relative}
+  .pill input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+  .pill span{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid rgba(15,42,48,.3);font-weight:600;font-size:15px;transition:background .25s,color .25s}
+  .pill input:checked+span{background:var(--deep);border-color:var(--deep);color:#fff}
+  .pill input:focus-visible+span{outline:3px solid var(--coral);outline-offset:2px}
+  .consent{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:15px;line-height:1.5;min-height:44px}
+  .consent input{width:24px;height:24px;flex:none;margin-top:1px;accent-color:var(--teal)}
+  .formbox .btn.submit{margin-top:22px;width:100%}
+  .success{background:var(--mint);border-radius:26px;padding:30px;color:var(--deep)}
+  .success h3{color:var(--deep);font-size:1.8rem}
+  .note{font-size:14px;color:var(--muted);margin-top:14px}
+
+  /* contact */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .cbox{background:var(--sand);border-radius:28px;padding:32px 30px}
+  .hours{display:grid;grid-template-columns:1fr auto;gap:10px 16px;margin-top:16px;font-size:16px}
+  .hours dd{font-weight:600;text-align:right}
+  .open-now{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-top:18px;padding:6px 14px;border-radius:999px;background:#fff;color:var(--deep);min-height:36px}
+  .open-now i{width:10px;height:10px;border-radius:50%;background:#1f9d62}
+  .open-now.closed i{background:#a3261b}
+  .cbox address{font-style:normal;margin-top:14px}
+  .cbox a.tel{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--deep);font-size:1.2rem}
+  .map{border-radius:28px;overflow:hidden;background:#dfeeee;min-height:300px}
+  .map svg{width:100%;height:100%;display:block;min-height:300px}
+
+  footer.site{background:var(--ink);color:#d3e1e4;padding:56px 0 40px;font-size:15px}
+  footer.site .cols{display:flex;gap:32px;justify-content:space-between;flex-wrap:wrap}
+  footer.site a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;border-bottom:1px solid transparent}
+  footer.site a:hover{border-bottom-color:currentColor}
+  footer.site ul{list-style:none;padding:0}
+  footer.site .logo{color:#fff}
+  footer.site .logo b{color:#7fd8e0}
+  footer.site .fine{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.15);color:#b9cfd3;font-size:14px}
+
+  .sticky-cta{display:none}
+
+  /* reveal (JS only) */
+  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:1020px){
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .hero-grid,.book-grid,.ba-grid,.calc,.contact{grid-template-columns:1fr}
+    .team,.fin{grid-template-columns:1fr}
+    .fcard.feat{transform:none}
+    .team{gap:44px}
+    .steps,.tech{grid-template-columns:repeat(2,1fr)}
+    .steps::before{display:none}
+    .summary{position:static}
+    .facts{grid-template-columns:repeat(2,auto)}
+    nav a{padding:0 9px;font-size:14px}
+  }
+
+  /* mobile */
+  @media (max-width:760px){
+    body{padding-bottom:92px}
+    section{padding:64px 0}
+    .hero{padding:28px 0 56px}
+    #burger{display:inline-flex}
+    .js nav{display:none;width:100%;order:3;padding-bottom:12px}
+    .js nav.open{display:block}
+    nav ul{flex-direction:column;align-items:stretch;gap:2px}
+    nav a{font-size:17px;padding:0 16px;color:var(--ink)}
+    nav a.nav-cta{margin:6px 0 0;justify-content:center}
+    html:not(.js) nav ul{flex-wrap:wrap}
+    h1{font-size:clamp(2.3rem,10.4vw,3rem)}
+    h2{font-size:clamp(1.95rem,8.6vw,2.4rem)}
+    .hero p.lead{font-size:1.05rem;margin-bottom:22px}
+    .actions .btn{flex:1 1 100%}
+    .facts{gap:16px 20px;margin-top:28px}
+    .float{padding:9px 12px;font-size:13px}
+    .float.f1{left:0;top:4%}.float.f2{right:0;bottom:4%}
+    .cards,.opts,.steps,.tech,.formgrid{grid-template-columns:1fr}
+    .chips{flex-wrap:nowrap;overflow-x:auto;margin-right:-20px;padding-right:20px;padding-bottom:4px}
+    .chips button{flex:none}
+    .opt{padding:10px 14px}
+    .summary{padding:26px 20px}
+    .summary .total b{font-size:2.4rem}
+    .formbox{padding:26px 18px}
+    .cbox{padding:26px 20px}
+    .quote p{font-size:1.25rem}
+    .quote{flex-basis:88%}
+    .steps li{text-align:left;display:grid;grid-template-columns:60px 1fr;gap:0 16px;padding:0}
+    .steps .n{margin:0;grid-row:1/4}
+    .strip ul{justify-content:flex-start}
+    .sticky-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:40;min-height:56px;align-items:center;justify-content:center;background:var(--coral);color:#fff;border-radius:999px;font-weight:700;font-size:17px;text-decoration:none;box-shadow:0 10px 30px rgba(15,42,48,.4);transition:opacity .3s,transform .3s}
+    .sticky-cta.away{opacity:0;pointer-events:none;transform:translateY(20px)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .js .reveal{opacity:1;transform:none}
+    .spark{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="tooth" viewBox="0 0 64 64"><path d="M32 14C26 8 14 7 10 18C6 28 12 36 14 46C15 54 18 60 22 60C27 60 27 46 32 46C37 46 37 60 42 60C46 60 49 54 50 46C52 36 58 28 54 18C50 7 38 8 32 14Z"/></symbol>
+    <clipPath id="mouth"><path d="M70 112Q200 28 330 112Q200 204 70 112Z"/></clipPath>
+    <symbol id="smile" viewBox="0 0 400 240">
+      <rect width="400" height="240" fill="#f0cfc4"/>
+      <path d="M30 116Q200 -20 370 116Q200 258 30 116Z" fill="#b64f55"/>
+      <path d="M70 112Q200 28 330 112Q200 204 70 112Z" fill="#4a1a1f"/>
+      <g clip-path="url(#mouth)" fill="currentColor" stroke="rgba(15,42,48,.28)" stroke-width="1.4">
+        <rect x="92" y="70" width="26" height="46" rx="9"/><rect x="116" y="62" width="28" height="52" rx="10"/><rect x="142" y="56" width="30" height="58" rx="11"/><rect x="170" y="54" width="30" height="62" rx="11"/>
+        <rect x="200" y="54" width="30" height="62" rx="11"/><rect x="228" y="56" width="30" height="58" rx="11"/><rect x="256" y="62" width="28" height="52" rx="10"/><rect x="282" y="70" width="26" height="46" rx="9"/>
+        <rect x="112" y="116" width="24" height="42" rx="9"/><rect x="134" y="118" width="26" height="46" rx="10"/><rect x="158" y="120" width="28" height="46" rx="10"/><rect x="186" y="122" width="28" height="46" rx="10"/><rect x="214" y="120" width="28" height="46" rx="10"/><rect x="240" y="118" width="26" height="46" rx="10"/><rect x="264" y="116" width="24" height="42" rx="9"/>
+      </g>
+      <path d="M70 112Q200 28 330 112" fill="none" stroke="#8c3a41" stroke-width="3"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="demo">Demo website — the clinic is fictional.</div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Lumen Dental, home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#e4f4f4" stroke="#0b7c88" stroke-width="4" stroke-linejoin="round"/><path d="M44 6l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#b8452f"/></svg>
+      Lumen<b>Dental</b>
+    </a>
+    <button id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span></span></button>
+    <nav id="nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#prices">Prices</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#visit">First visit</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="nav-cta" href="#book">Book a visit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge"><i aria-hidden="true"></i>New patients welcome · Same-week appointments</span>
+      <h1>Gentle dentistry, <em>honestly priced.</em></h1>
+      <p class="lead">Modern, calm care for the whole family in the heart of Manchester. You see the price in writing before we start, and nothing happens until you say yes.</p>
+      <div class="actions">
+        <a class="btn" href="#book">Book your check-up</a>
+        <a class="btn ghost" href="#prices">Build your price</a>
+      </div>
+      <p class="rating" style="margin-top:20px"><span class="stars" aria-hidden="true">★★★★★</span><span><b>4.9</b> from 860+ patient reviews</span></p>
+      <div class="facts">
+        <div><b>15</b>years in Manchester</div>
+        <div><b>12k+</b>patients smiling</div>
+        <div><b>£45</b>check-up &amp; clean</div>
+        <div><b>Sat</b>open weekends</div>
+      </div>
+    </div>
+    <div class="visual">
+      <svg class="art" viewBox="0 0 440 440" role="img" aria-label="Illustration of a bright, healthy tooth surrounded by sparkles">
+        <circle cx="220" cy="220" r="200" fill="#cfe9ea"/>
+        <circle cx="220" cy="220" r="150" fill="#e4f4f4"/>
+        <circle cx="220" cy="220" r="106" fill="#fff" opacity=".7"/>
+        <g transform="translate(78 78) scale(4.4)"><use href="#tooth" width="64" height="64" fill="#fff" stroke="#06505a" stroke-width="2" stroke-linejoin="round"/><path d="M19 20q2-6 8-7" fill="none" stroke="#cfe9ea" stroke-width="2.4" stroke-linecap="round"/></g>
+        <g fill="#b8452f"><path class="spark" d="M356 92l8 20 20 8-20 8-8 20-8-20-20-8 20-8z"/><path class="spark s2" d="M70 150l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#0b7c88"/><path class="spark s3" d="M330 330l6 14 14 6-14 6-6 14-6-14-14-6 14-6z" fill="#f0b429"/></g>
+      </svg>
+      <div class="float f1"><b>Next free slot</b>Tomorrow, 09:40</div>
+      <div class="float f2"><b>Written quote</b>before any treatment</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <ul>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="#7fd8e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg>Prices in writing first</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="#7fd8e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg>Pay monthly at 0% interest</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="#7fd8e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg>Same-day emergency care</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="#7fd8e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg>Nervous patients welcome</li>
+    </ul>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Our treatments</span><h2>Everything for a <em>healthy smile</em></h2><p class="lead">From routine check-ups to full smile makeovers, all under one roof. Filter by what you are looking for.</p></div>
+    <div class="chips" id="chips" role="group" aria-label="Filter treatments">
+      <button type="button" aria-pressed="true" data-cat="all">All</button>
+      <button type="button" aria-pressed="false" data-cat="prevention">Prevention</button>
+      <button type="button" aria-pressed="false" data-cat="cosmetic">Cosmetic</button>
+      <button type="button" aria-pressed="false" data-cat="restorative">Restorative</button>
+      <button type="button" aria-pressed="false" data-cat="urgent">Urgent</button>
+    </div>
+    <div class="cards" id="cards">
+      <article class="svc reveal" data-cat="prevention">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="46" cy="42" r="8" fill="#e4f4f4" stroke="#b8452f" stroke-width="3"/><path d="M52 48l7 7" stroke="#b8452f" stroke-width="4" stroke-linecap="round"/></svg>
+        <span class="cat">Prevention</span><h3>Check-up &amp; clean</h3><p>A full exam, digital scan, scale and polish, and a clear written plan for your teeth.</p>
+        <div class="from"><span>from</span>£45</div>
+      </article>
+      <article class="svc reveal" data-cat="prevention">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="48" cy="14" r="6" fill="none" stroke="#0b7c88" stroke-width="3"/><circle cx="56" cy="28" r="3.5" fill="none" stroke="#0b7c88" stroke-width="2.5"/><circle cx="12" cy="10" r="3" fill="none" stroke="#0b7c88" stroke-width="2.5"/></svg>
+        <span class="cat">Prevention</span><h3>Hygiene &amp; gum care</h3><p>A deeper clean with our hygienist to stop gum disease early, with tips that actually fit your routine.</p>
+        <div class="from"><span>from</span>£85</div>
+      </article>
+      <article class="svc reveal" data-cat="prevention">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 26h.01M40 26h.01" stroke="#06505a" stroke-width="5" stroke-linecap="round"/><path d="M24 34q8 8 16 0" fill="none" stroke="#b8452f" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="cat">Prevention · Family</span><h3>Children's dentistry</h3><p>Short, friendly visits with stickers and no fuss. We make a good first impression last for life.</p>
+        <div class="from"><span>from</span>£30</div>
+      </article>
+      <article class="svc reveal" data-cat="cosmetic">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 4l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#f0b429" stroke="#b8452f" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span class="cat">Cosmetic</span><h3>Teeth whitening</h3><p>Up to eight shades brighter in a single visit, gentle on enamel, with take-home top-up trays.</p>
+        <div class="from"><span>from</span>£220</div>
+      </article>
+      <article class="svc reveal" data-cat="cosmetic">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 24q2-8 10-9M22 32q-1-3 0-5" fill="none" stroke="#0b7c88" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="cat">Cosmetic</span><h3>Porcelain veneers</h3><p>Thin, natural-looking shells that close gaps and reshape chips. Preview the result before you commit.</p>
+        <div class="from"><span>from</span>£450 each</div>
+      </article>
+      <article class="svc reveal" data-cat="cosmetic">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="none" stroke="#0b7c88" stroke-width="7" stroke-linejoin="round" opacity=".4"/><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/></svg>
+        <span class="cat">Cosmetic</span><h3>Invisalign</h3><p>Nearly invisible aligners with a free 3D smile preview, so you can see the finish line on day one.</p>
+        <div class="from"><span>from</span>£2,400</div>
+      </article>
+      <article class="svc reveal" data-cat="restorative">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 12l7 6 9-10 9 10 7-6" fill="none" stroke="#b8452f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="cat">Restorative</span><h3>Fillings &amp; crowns</h3><p>Tooth-coloured fillings and porcelain crowns that match your smile and are built to last.</p>
+        <div class="from"><span>from</span>£95</div>
+      </article>
+      <article class="svc reveal" data-cat="restorative">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4C22 4 14 10 14 20c0 6 4 10 18 10s18-4 18-10C50 10 42 4 32 4z" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 32h12M26 38h12M27 44h10M29 50h6M32 30v28" stroke="#0b7c88" stroke-width="3.5" stroke-linecap="round"/></svg>
+        <span class="cat">Restorative</span><h3>Dental implants</h3><p>A permanent, natural-feeling replacement for a missing tooth, planned on a 3D scan for precision.</p>
+        <div class="from"><span>from</span>£1,850</div>
+      </article>
+      <article class="svc reveal" data-cat="urgent">
+        <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><use href="#tooth" fill="#fff" stroke="#06505a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="48" cy="16" r="13" fill="#b8452f"/><path d="M48 9v14M41 16h14" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+        <span class="cat">Urgent</span><h3>Emergency care</h3><p>Toothache, a broken tooth or a lost filling? Call before 11am and we will see you the same day.</p>
+        <div class="from"><span>from</span>£70</div>
+      </article>
+    </div>
+    <p class="count" id="count" role="status"></p>
+  </div>
+</section>
+
+<section id="prices" class="calc-sec">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Price builder</span><h2>See your cost <em>before you book</em></h2><p class="lead">Tick what you are interested in and we add it up. No account, no email, no pressure.</p></div>
+    <p class="nojs-note">The price builder needs JavaScript. All starting prices are listed on each treatment above, and your dentist will confirm a full written quote at your visit.</p>
+    <div class="calc js-only">
+      <div class="opts" id="opts">
+        <label class="opt"><input type="checkbox" data-name="Check-up &amp; clean" data-price="45" checked><span class="t">Check-up &amp; clean<small>Exam, scale and polish</small></span><span class="p num">£45</span></label>
+        <label class="opt"><input type="checkbox" data-name="Digital X-rays" data-price="25"><span class="t">Digital X-rays<small>Low-dose, instant</small></span><span class="p num">£25</span></label>
+        <label class="opt"><input type="checkbox" data-name="Hygienist deep clean" data-price="85"><span class="t">Hygienist deep clean<small>45 minutes</small></span><span class="p num">£85</span></label>
+        <label class="opt"><input type="checkbox" data-name="Teeth whitening" data-price="220"><span class="t">Teeth whitening<small>In-chair, one visit</small></span><span class="p num">£220</span></label>
+        <div class="opt qty"><span class="t">White fillings<small>£95 each</small></span>
+          <div class="stepper"><button type="button" id="fm" aria-label="Fewer fillings">−</button><output id="fq" class="num" aria-live="polite">0</output><button type="button" id="fp" aria-label="More fillings">+</button></div></div>
+        <label class="opt"><input type="checkbox" data-name="Porcelain crown" data-price="590"><span class="t">Porcelain crown<small>Per tooth</small></span><span class="p num">£590</span></label>
+        <label class="opt"><input type="checkbox" data-name="Dental implant" data-price="1850"><span class="t">Dental implant<small>Per tooth, crown included</small></span><span class="p num">£1,850</span></label>
+        <label class="opt"><input type="checkbox" data-name="Invisalign" data-price="2400"><span class="t">Invisalign<small>Full course of aligners</small></span><span class="p num">£2,400</span></label>
+      </div>
+      <aside class="summary" aria-label="Your estimate">
+        <h3>Your estimate</h3>
+        <dl>
+          <dt>Treatments</dt><dd id="sCount" class="num">0</dd>
+          <dt>Subtotal</dt><dd id="sSub" class="num">£0</dd>
+          <dt>Lumen Club discount</dt><dd id="sDisc" class="num">−£0</dd>
+          <div class="total"><span>Total</span><b id="sTotal" class="num" aria-live="polite">£0</b></div>
+        </dl>
+        <label class="club"><input type="checkbox" id="club"><span>I'm a Lumen Club member (£14/month, 10% off treatment)</span></label>
+        <label class="sel" for="plan">How would you like to pay?</label>
+        <select id="plan" autocomplete="off">
+          <option value="1">In full on the day</option>
+          <option value="6">6 months at 0%</option>
+          <option value="12">12 months at 0%</option>
+          <option value="24">24 months at 0%</option>
+        </select>
+        <div class="monthly" id="monthly" role="status"></div>
+        <button class="btn light" type="button" id="addPlan">Add this plan to my booking</button>
+        <p class="fine-note">An estimate only. Your dentist confirms a written quote after your exam. Demo finance terms are fictional.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="smiles">
+  <div class="wrap ba-grid">
+    <div class="reveal">
+      <span class="eyebrow">Real change, gently</span>
+      <h2>Brighter in <em>one visit</em></h2>
+      <p class="lead">Drag the handle to compare. Our whitening lifts years of tea, coffee and wine in about an hour, with a desensitising gel to keep it comfortable.</p>
+      <ul class="check-list">
+        <li>Up to eight shades brighter in a single session</li>
+        <li>Enamel-safe, dentist-supervised, no harsh trays</li>
+        <li>Free take-home top-up kit with every treatment</li>
+      </ul>
+      <a class="btn" href="#book">Book a whitening visit</a>
+    </div>
+    <div class="reveal">
+      <div class="ba" id="ba">
+        <div class="ba-pane before"><svg viewBox="0 0 400 240" role="img" aria-label="Smile before whitening, teeth slightly yellow"><use href="#smile"/></svg><span class="tag">Before</span></div>
+        <div class="ba-pane after"><svg viewBox="0 0 400 240" role="img" aria-label="Smile after whitening, bright white teeth"><use href="#smile"/></svg><span class="tag">After</span></div>
+        <span class="ba-handle" aria-hidden="true"></span>
+        <input class="js-only" type="range" id="baRange" min="0" max="100" value="50" aria-label="Compare before and after whitening" autocomplete="off">
+      </div>
+      <p class="ba-note">Illustration only. Results vary from person to person.</p>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="team-sec">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Meet the team</span><h2>Calm hands, <em>clear words</em></h2><p class="lead">Three people who explain everything before they do it, and who will happily stop whenever you raise a hand.</p></div>
+    <div class="team">
+      <article class="doc reveal">
+        <svg viewBox="0 0 280 320" role="img" aria-label="Abstract portrait of Dr Amara Okafor"><path d="M20 320V130C20 50 80 10 140 10s120 40 120 120v190z" fill="#fff"/><path d="M58 320c0-62 38-94 82-94s82 32 82 94z" fill="#06505a"/><path d="M118 226l22 40 22-40z" fill="#fff"/><circle cx="140" cy="140" r="46" fill="#a9755a"/><path d="M90 140c-8-58 34-84 66-70 38 10 46 50 34 70-8-28-30-38-48-38s-40 8-52 38z" fill="#1d1a19"/><circle cx="226" cy="64" r="22" fill="#cfe9ea" opacity=".9"/></svg>
+        <h3>Dr Amara Okafor</h3><span class="role">Principal dentist · 14 years</span><p>Former hospital dentist who built Lumen around one idea: no one should dread a check-up.</p>
+      </article>
+      <article class="doc reveal">
+        <svg viewBox="0 0 280 320" role="img" aria-label="Abstract portrait of Dr Tom Hargreaves"><path d="M20 320V130C20 50 80 10 140 10s120 40 120 120v190z" fill="#fff"/><path d="M56 320c0-62 40-94 84-94s84 32 84 94z" fill="#0b7c88"/><path d="M118 226l22 40 22-40z" fill="#fff"/><circle cx="140" cy="140" r="46" fill="#f1d3c0"/><path d="M96 128c4-34 24-48 46-48s42 14 46 48c-12-14-28-20-46-20s-34 6-46 20z" fill="#7a4a2c"/><path d="M112 176c10 12 46 12 56 0-6 18-50 18-56 0z" fill="#7a4a2c"/><circle cx="58" cy="82" r="18" fill="#f0b429" opacity=".55"/></svg>
+        <h3>Dr Tom Hargreaves</h3><span class="role">Cosmetic &amp; Invisalign · 9 years</span><p>Obsessed with detail. He will show you your finished smile on screen before he starts.</p>
+      </article>
+      <article class="doc reveal">
+        <svg viewBox="0 0 280 320" role="img" aria-label="Abstract portrait of Hannah Doyle"><path d="M20 320V130C20 50 80 10 140 10s120 40 120 120v190z" fill="#fff"/><path d="M60 320c0-62 36-94 80-94s80 32 80 94z" fill="#b8452f"/><circle cx="140" cy="142" r="46" fill="#e8bfa4"/><path d="M84 160c-16-76 30-102 58-102s76 26 56 102c-4-34-20-56-56-56s-54 22-58 56z" fill="#c1672a"/><circle cx="232" cy="262" r="26" fill="#cfe9ea" opacity=".9"/></svg>
+        <h3>Hannah Doyle</h3><span class="role">Dental hygienist · 11 years</span><p>Teaches gum care without a lecture. Most patients say it is the gentlest clean they have had.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Your first visit</span><h2>What <em>actually</em> happens</h2><p class="lead">About an hour, start to finish. No surprises, and you can pause at any point.</p></div>
+    <ol class="steps">
+      <li class="reveal"><span class="n">1</span><h3>A proper hello</h3><p>A cup of tea and a chat about your teeth, worries and goals before anyone picks up a tool.</p><span class="min">10 min</span></li>
+      <li class="reveal"><span class="n">2</span><h3>Gentle exam &amp; scan</h3><p>A 3D scan and low-dose X-rays show us everything, and you see it on screen too.</p><span class="min">20 min</span></li>
+      <li class="reveal"><span class="n">3</span><h3>Your plan, in writing</h3><p>Options, prices and timings on one page. Take it home, compare it, decide in your own time.</p><span class="min">10 min</span></li>
+      <li class="reveal"><span class="n">4</span><h3>Clean &amp; polish</h3><p>If you want it, a scale and polish the same visit, so you leave with a fresh-feeling mouth.</p><span class="min">20 min</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="tech-sec" id="tech">
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Technology</span><h2>Better tools, <em>less discomfort</em></h2><p class="lead">We invest in equipment that is faster, kinder and more accurate than what you will remember.</p></div>
+    <div class="tech">
+      <article class="tile reveal"><svg viewBox="0 0 52 52" fill="none" stroke="#7fd8e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14l20-8 20 8v24L26 46 6 38z"/><path d="M6 14l20 8 20-8M26 22v24"/></svg><h3>3D intraoral scanner</h3><p>No goopy moulds. A small wand builds a colour 3D model of your teeth in minutes.</p></article>
+      <article class="tile reveal"><svg viewBox="0 0 52 52" fill="none" stroke="#7fd8e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="36" height="36" rx="8"/><path d="M18 36V22M26 36V16M34 36V26"/></svg><h3>Low-dose digital X-rays</h3><p>Up to 90% less radiation than film, with images on screen the second you need them.</p></article>
+      <article class="tile reveal"><svg viewBox="0 0 52 52" fill="none" stroke="#7fd8e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6c8 10 14 16 14 24a14 14 0 0 1-28 0C12 22 18 16 26 6z"/><path d="M20 32a6 6 0 0 0 6 6"/></svg><h3>Comfort-first numbing</h3><p>Numbing gel first, then slow, warm anaesthetic. Most patients tell us they felt nothing.</p></article>
+      <article class="tile reveal"><svg viewBox="0 0 52 52" fill="none" stroke="#7fd8e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="26" cy="26" r="18"/><path d="M26 14v12l8 5"/></svg><h3>Same-day crowns</h3><p>Designed and milled in the clinic, so a lot of crowns are finished in a single appointment.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="voices">
+  <div class="wrap">
+    <div class="voices-head head reveal">
+      <div><span class="eyebrow">Patient stories</span><h2>Patients say it <em>best</em></h2><p class="lead">Real words from people who used to dread the dentist.</p></div>
+      <div class="arrows" aria-label="Review carousel controls">
+        <button type="button" id="prev" aria-label="Previous review">←</button>
+        <output id="pos" class="num" aria-live="polite">1 / 5</output>
+        <button type="button" id="next" aria-label="Next review">→</button>
+      </div>
+    </div>
+    <div class="track" id="track" role="region" aria-roledescription="carousel" aria-label="Patient reviews" tabindex="0">
+      <figure class="quote"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“I hadn't been to a dentist in eight years. They were so kind that I booked my next visit before I'd left the building.”</p><footer><i>S</i><span><b>Sophie T.</b>Check-up and clean</span></footer></figure>
+      <figure class="quote"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“Fast, painless, and the price was explained up front. My whitening result is genuinely incredible.”</p><footer><i>J</i><span><b>James R.</b>Teeth whitening</span></footer></figure>
+      <figure class="quote"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“I brought my two kids and they asked if they could come back. I have never heard that about a dentist.”</p><footer><i>P</i><span><b>Priya N.</b>Family visit</span></footer></figure>
+      <figure class="quote"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“Cracked a tooth on a Friday afternoon, seen at nine on Saturday morning. Calm, quick, and no drama.”</p><footer><i>D</i><span><b>Daniel O.</b>Emergency appointment</span></footer></figure>
+      <figure class="quote"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“Watching my Invisalign preview on screen on day one is what made me say yes. Eight months in, it is exactly as promised.”</p><footer><i>E</i><span><b>Emma W.</b>Invisalign</span></footer></figure>
+    </div>
+  </div>
+</section>
+
+<section id="finance">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Paying for care</span><h2>Spread the cost, <em>skip the stress</em></h2><p class="lead">Good dentistry should not mean a big bill all at once. Pick what suits you.</p></div>
+    <div class="fin">
+      <article class="fcard reveal">
+        <h3>0% monthly plans</h3><div class="big">6–24<small> months</small></div><p class="sub">On any treatment over £300</p>
+        <ul><li>No interest and no hidden fees</li><li>Approval decision in minutes</li><li>Pay early at any time</li></ul>
+      </article>
+      <article class="fcard feat reveal">
+        <span class="tagc">Best for families</span><h3>Lumen Club</h3><div class="big">£14<small> / month</small></div><p class="sub">Per adult, cancel anytime</p>
+        <ul><li>Two check-ups and one hygiene visit a year</li><li>10% off all treatment</li><li>Priority emergency slots</li></ul>
+      </article>
+      <article class="fcard reveal">
+        <h3>Insurance</h3><div class="big">Direct<small> claims</small></div><p class="sub">Most major UK dental plans</p>
+        <ul><li>We send the claim for you</li><li>Pre-authorisation on bigger plans</li><li>Clear split of what you pay</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="team-sec">
+  <div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Good questions</span><h2>You might be <em>wondering</em></h2></div>
+    <div class="faq reveal">
+      <details><summary>Will it hurt?</summary><p>Very rarely. We use numbing gel before every injection, work slowly, and agree a hand signal so you can pause whenever you like. If something is uncomfortable, we stop.</p></details>
+      <details><summary>I'm really nervous. Can you help?</summary><p>Yes. Tell us when you book and we will give you a longer first appointment, a quiet room and as much explanation (or distraction) as you want. We also offer gentle sedation for more complex work.</p></details>
+      <details><summary>How much will it cost before I commit?</summary><p>You get a written plan with every price before any treatment. The price builder above shows typical costs, and your dentist confirms the exact figure after your exam.</p></details>
+      <details><summary>Do you take insurance, and can I pay monthly?</summary><p>We claim directly from most major UK dental insurers, and offer 0% monthly plans on treatment over £300. Lumen Club members also get 10% off.</p></details>
+      <details><summary>What if I have a dental emergency?</summary><p>Call us before 11am on a weekday and we will see you the same day. Outside those hours, leave a message and we will phone you first thing.</p></details>
+      <details><summary>Do you see children?</summary><p>Of course. Children are welcome from their first tooth. Their first check-ups are short, friendly, and good practice for a lifetime of easy visits.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="book">
+  <div class="wrap book-grid">
+    <div class="reveal">
+      <span class="eyebrow">Book a visit</span>
+      <h2>Your first check-up, <em>sorted</em></h2>
+      <p class="lead">Tell us when suits you and we will confirm by text within the hour, during opening times.</p>
+      <ul class="points">
+        <li><svg viewBox="0 0 28 28" fill="none" stroke="#0b7c88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="11"/><path d="M14 8v6l4 3"/></svg><span>Most patients are seen within the week.</span></li>
+        <li><svg viewBox="0 0 28 28" fill="none" stroke="#0b7c88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 14l6 6 12-13"/></svg><span>No payment now. Free to cancel up to 24 hours before.</span></li>
+        <li><svg viewBox="0 0 28 28" fill="none" stroke="#0b7c88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="18" height="13" rx="3"/><path d="M5 12l9 6 9-6"/></svg><span>We only use your details to arrange your visit.</span></li>
+      </ul>
+    </div>
+    <div class="formbox reveal">
+      <form id="bookform" novalidate>
+        <div class="formgrid">
+          <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name" required><span class="err" id="e-name" role="alert"></span></div>
+          <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="07700 900123" required><span class="err" id="e-phone" role="alert"></span></div>
+          <div class="field full"><label for="email">Email (optional, for your confirmation)</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.co.uk"><span class="err" id="e-email" role="alert"></span></div>
+          <div class="field full"><label for="svc">What would you like to book?</label>
+            <select id="svc" name="svc" autocomplete="off" required><option value="">Choose…</option><option>Check-up &amp; clean</option><option>Teeth whitening</option><option>Invisalign consultation</option><option>Fillings, crowns or implants</option><option>Children's check-up</option><option>Emergency appointment</option><option>Treatment plan from the price builder</option></select><span class="err" id="e-svc" role="alert"></span></div>
+          <div class="field"><label for="date">Preferred day</label><input id="date" name="date" type="date" autocomplete="off" required><span class="err" id="e-date" role="alert"></span></div>
+          <fieldset class="field"><legend>Preferred time</legend>
+            <div class="pills" id="timepills">
+              <label class="pill"><input type="radio" name="time" value="morning" checked><span>Morning</span></label>
+              <label class="pill"><input type="radio" name="time" value="afternoon"><span>Afternoon</span></label>
+            </div><span class="err" id="e-time" role="alert"></span></fieldset>
+          <fieldset class="field full"><legend>Have you been to Lumen before?</legend>
+            <div class="pills">
+              <label class="pill"><input type="radio" name="patient" value="new" checked><span>I'm a new patient</span></label>
+              <label class="pill"><input type="radio" name="patient" value="existing"><span>I'm already a patient</span></label>
+            </div></fieldset>
+          <div class="field full"><label for="msg">Anything we should know? (optional)</label><textarea id="msg" name="msg" autocomplete="off" placeholder="Nervous, in pain, a question about cost…"></textarea></div>
+          <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" required><span>I agree that Lumen Dental may text me to arrange this appointment.</span></label><span class="err" id="e-consent" role="alert"></span></div>
+        </div>
+        <button class="btn submit" type="submit">Request my appointment</button>
+        <p class="note">This is a demo form. Nothing is sent anywhere.</p>
+      </form>
+      <div class="success" id="success" role="status" tabindex="-1" hidden></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:0">
+  <div class="wrap contact">
+    <div class="cbox reveal">
+      <span class="eyebrow">Find us</span>
+      <h2 style="font-size:2rem">Lumen Dental</h2>
+      <address>21 Oak Street<br>Manchester M1 0AA (fictional)</address>
+      <a class="tel" href="tel:+441610000000">0161 000 0000</a>
+      <dl class="hours">
+        <dt>Monday to Friday</dt><dd>8:00–18:00</dd>
+        <dt>Saturday</dt><dd>9:00–14:00</dd>
+        <dt>Sunday</dt><dd>Closed</dd>
+      </dl>
+      <span class="open-now" id="openNow" role="status" hidden><i aria-hidden="true"></i><span id="openText"></span></span>
+    </div>
+    <div class="map reveal">
+      <svg viewBox="0 0 520 340" role="img" aria-label="Simple map showing Lumen Dental on Oak Street, close to the tram stop">
+        <rect width="520" height="340" fill="#dfeeee"/>
+        <path d="M0 250C140 230 240 270 520 200" stroke="#fff" stroke-width="30" fill="none"/>
+        <path d="M120 0l30 340M330 0l-20 340M0 100l520 30" stroke="#fff" stroke-width="18" fill="none"/>
+        <g fill="#cfe0e0"><rect x="30" y="20" width="76" height="60" rx="6"/><rect x="170" y="20" width="130" height="64" rx="6"/><rect x="350" y="30" width="130" height="70" rx="6"/><rect x="36" y="150" width="70" height="70" rx="6"/><rect x="176" y="154" width="120" height="70" rx="6"/><rect x="350" y="160" width="130" height="50" rx="6"/></g>
+        <rect x="360" y="262" width="110" height="52" rx="6" fill="#bcd6d6"/>
+        <path d="M250 154q0-30 22-30t22 30c0 18-22 40-22 40s-22-22-22-40z" fill="#b8452f"/><circle cx="272" cy="150" r="8" fill="#fff"/>
+        <g font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#06505a"><text x="206" y="218">Oak Street</text><text x="364" y="294">Tram stop · 2 min</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><a class="logo" href="#top">Lumen<b>Dental</b></a><p>21 Oak Street, Manchester</p></div>
+      <ul>
+        <li><a href="#services">Services</a></li><li><a href="#prices">Prices</a></li><li><a href="#visit">First visit</a></li><li><a href="#book">Book a visit</a></li>
+      </ul>
+    </div>
+    <p class="fine">Demo website made for a portfolio. Lumen Dental, its team, reviews, prices and address are fictional.</p>
+  </div>
+</footer>
+
+<a class="sticky-cta" id="sticky" href="#book">Book your check-up</a>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){ return document.getElementById(id); }
+  function money(n){ return '£' + Math.round(n).toLocaleString('en-GB'); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  // burger
+  var burger = $('burger'), nav = $('nav');
+  function setNav(open){
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  burger.addEventListener('click', function(){ setNav(burger.getAttribute('aria-expanded') !== 'true'); });
+  nav.addEventListener('click', function(e){ if (e.target.closest('a')) setNav(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setNav(false); });
+
+  // service filter
+  var chips = [].slice.call(document.querySelectorAll('#chips button'));
+  var cards = [].slice.call(document.querySelectorAll('#cards .svc'));
+  var count = $('count');
+  chips.forEach(function(b){
+    b.addEventListener('click', function(){
+      var cat = b.dataset.cat, shown = 0;
+      chips.forEach(function(c){ c.setAttribute('aria-pressed', c === b ? 'true' : 'false'); });
+      cards.forEach(function(c){
+        var show = cat === 'all' || c.dataset.cat.indexOf(cat) === 0;
+        c.hidden = !show; if (show) { shown++; c.classList.add('in'); }
+      });
+      count.textContent = 'Showing ' + shown + ' of ' + cards.length + ' treatments' + (cat === 'all' ? '.' : ' in ' + b.textContent.toLowerCase() + '.');
+    });
+  });
+
+  // price builder
+  var boxes = [].slice.call(document.querySelectorAll('#opts input[type=checkbox]'));
+  var fq = $('fq'), qty = 0, FILL = 95;
+  var club = $('club'), plan = $('plan');
+  function calc(){
+    var sub = 0, n = 0;
+    boxes.forEach(function(b){ if (b.checked){ sub += +b.dataset.price; n++; } });
+    sub += qty * FILL; n += qty;
+    var disc = club.checked ? sub * 0.1 : 0, total = sub - disc;
+    $('sCount').textContent = n;
+    $('sSub').textContent = money(sub);
+    $('sDisc').textContent = '−' + money(disc);
+    $('sTotal').textContent = money(total);
+    var opts = plan.options, eligible = total >= 300;
+    for (var i = 1; i < opts.length; i++) opts[i].disabled = !eligible;
+    if (!eligible && plan.value !== '1') plan.value = '1';
+    var m = +plan.value, out = $('monthly');
+    if (!total) out.textContent = 'Tick a treatment to see your cost.';
+    else if (m === 1) out.innerHTML = eligible ? 'Pay <b>' + money(total) + '</b> on the day, or spread it with a 0% plan.' : 'Pay <b>' + money(total) + '</b> on the day. 0% plans start from £300.';
+    else out.innerHTML = '<b>' + money(total / m) + '</b> a month for ' + m + ' months, 0% interest.';
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', calc); });
+  club.addEventListener('change', calc); plan.addEventListener('change', calc);
+  $('fp').addEventListener('click', function(){ if (qty < 8){ qty++; fq.textContent = qty; calc(); } });
+  $('fm').addEventListener('click', function(){ if (qty > 0){ qty--; fq.textContent = qty; calc(); } });
+  calc();
+  $('addPlan').addEventListener('click', function(){
+    var lines = boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.dataset.name; });
+    if (qty) lines.push(qty + ' × white filling');
+    var m = $('msg'), s = $('svc');
+    if (lines.length){
+      m.value = 'Price builder plan: ' + lines.join(', ') + '. Estimate ' + $('sTotal').textContent + (club.checked ? ' (Lumen Club)' : '') + (+plan.value > 1 ? ', ' + plan.value + '-month plan.' : '.');
+      s.value = 'Treatment plan from the price builder';
+    }
+    $('book').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+    setTimeout(function(){ $('name').focus({preventScroll:true}); }, reduce ? 0 : 600);
+  });
+
+  // before / after
+  var ba = $('ba'), range = $('baRange');
+  range.addEventListener('input', function(){ ba.style.setProperty('--pos', range.value + '%'); });
+
+  // reviews carousel
+  var track = $('track'), prev = $('prev'), next = $('next'), pos = $('pos');
+  var slides = [].slice.call(track.children);
+  function step(){ return slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth; }
+  function idx(){ return Math.min(slides.length - 1, Math.round(track.scrollLeft / step())); }
+  function upd(){
+    pos.textContent = (idx() + 1) + ' / ' + slides.length;
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+  }
+  prev.addEventListener('click', function(){ track.scrollBy({left: -step(), behavior: reduce ? 'auto' : 'smooth'}); });
+  next.addEventListener('click', function(){ track.scrollBy({left: step(), behavior: reduce ? 'auto' : 'smooth'}); });
+  track.addEventListener('scroll', function(){ window.requestAnimationFrame(upd); }, {passive:true});
+  track.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight'){ e.preventDefault(); next.click(); }
+    if (e.key === 'ArrowLeft'){ e.preventDefault(); prev.click(); }
+  });
+  window.addEventListener('resize', upd); upd();
+
+  // open now
+  (function(){
+    var H = {0:null,1:[8,18],2:[8,18],3:[8,18],4:[8,18],5:[8,18],6:[9,14]};
+    var names = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var d = new Date(), h = H[d.getDay()], t = d.getHours() + d.getMinutes() / 60;
+    var box = $('openNow'), txt = $('openText');
+    if (h && t >= h[0] && t < h[1]){ txt.textContent = 'Open now · closes ' + h[1] + ':00'; }
+    else {
+      var k = d.getDay(), when = '';
+      if (h && t < h[0]) when = 'today ' + h[0] + ':00';
+      else { for (var i = 1; i <= 7; i++){ var dd = (k + i) % 7; if (H[dd]){ when = (i === 1 ? 'tomorrow' : names[dd]) + ' ' + H[dd][0] + ':00'; break; } } }
+      txt.textContent = 'Closed now · opens ' + when; box.classList.add('closed');
+    }
+    box.hidden = false;
+  })();
+
+  // booking form
+  var form = $('bookform'), box = $('success');
+  var dateEl = $('date'), today = new Date(); today.setHours(0,0,0,0);
+  function iso(d){ return d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  dateEl.min = iso(today);
+  function timeVal(){ var r = form.querySelector('input[name=time]:checked'); return r ? r.value : ''; }
+  var rules = [
+    ['name', function(el){ return el.value.trim().length > 1 ? '' : 'Please tell us your name.'; }],
+    ['phone', function(el){ var v = el.value.replace(/[\s()\-]/g, ''); return /^(\+44|0)\d{9,10}$/.test(v) ? '' : 'Enter a UK mobile number, for example 07700 900123.'; }],
+    ['email', function(el){ var v = el.value.trim(); return !v || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'That email looks incomplete, for example you@example.co.uk.'; }],
+    ['svc', function(el){ return el.value ? '' : 'Choose what you would like to book.'; }],
+    ['date', function(el){
+      if (!el.value) return 'Choose a day.';
+      var d = new Date(el.value + 'T12:00:00');
+      if (isNaN(d) || d < today) return 'Choose today or a future day.';
+      if (d.getDay() === 0) return 'We are closed on Sundays. Please pick another day.';
+      if (d.getDay() === 6 && timeVal() === 'afternoon') return 'On Saturdays we close at 2pm. Pick a morning, or another day.';
+      return '';
+    }],
+    ['consent', function(el){ return el.checked ? '' : 'Please tick to let us contact you.'; }]
+  ];
+  function check(r){
+    var el = $(r[0]), msg = r[1](el), out = $('e-' + r[0]);
+    out.textContent = msg;
+    if (msg){ el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', out.id); }
+    else { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); }
+    return msg ? el : null;
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var first = null;
+    rules.forEach(function(r){ var bad = check(r); if (bad && !first) first = bad; });
+    if (first){ first.focus(); return; }
+    var d = new Date(dateEl.value + 'T12:00:00');
+    var nice = d.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long'});
+    box.innerHTML = '<h3>Thanks ' + esc($('name').value.trim().split(' ')[0]) + ', you are nearly in.</h3><p>We have noted <b>' + esc($('svc').value) + '</b> for <b>' + esc(nice) + '</b> (' + esc(timeVal()) + '). We will text <b>' + esc($('phone').value.trim()) + '</b> within the hour to confirm. This is a demo, so nothing was actually sent.</p>';
+    form.hidden = true; box.hidden = false; box.focus();
+  });
+  rules.forEach(function(r){
+    var el = $(r[0]);
+    el.addEventListener('input', function(){ el.removeAttribute('aria-invalid'); $('e-' + r[0]).textContent = ''; });
+    el.addEventListener('change', function(){ el.removeAttribute('aria-invalid'); $('e-' + r[0]).textContent = ''; });
+  });
+  [].forEach.call(form.querySelectorAll('input[name=time]'), function(r){ r.addEventListener('change', function(){ if (dateEl.value) { check(rules[4]); } }); });
+
+  // reveal on scroll + sticky cta
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el, i){ el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  }
+  if ('IntersectionObserver' in window){
+    var sticky = $('sticky');
+    new IntersectionObserver(function(en){ sticky.classList.toggle('away', en[0].isIntersecting); }, {threshold:.15}).observe($('book'));
+  }
+})();
+</script>
+</body>
+</html>

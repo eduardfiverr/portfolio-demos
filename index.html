@@ -84,11 +84,21 @@ footer{padding:24px 20px 40px;text-align:center;color:var(--muted);font-size:14p
 
 <script>
 (function () {
+  function fit() {
+    document.querySelectorAll(".thumb").forEach(function (t) {
+      var s = t.clientWidth / 1280, f = t.firstElementChild;
+      f.style.transform = "scale(" + s + ")";
+      f.style.height = Math.ceil(t.clientHeight / s) + "px";
+    });
+  }
+  fit();
+  addEventListener("resize", fit);
   var btns = document.querySelectorAll(".filters button"), cards = document.querySelectorAll("#grid .card");
   btns.forEach(function (b) {
     b.addEventListener("click", function () {
       btns.forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
       cards.forEach(function (c) { c.hidden = b.dataset.f !== "all" && c.dataset.l !== b.dataset.f; });
+      fit();
     });
   });
 })();
